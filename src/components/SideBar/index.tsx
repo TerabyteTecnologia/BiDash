@@ -8,6 +8,7 @@ import {
 import { LuLayoutDashboard } from "react-icons/lu";
 
 import logo from '../../assets/icons/logoTeraByte.svg';
+
 import SidebarItem from '../SidebarItem';
 
 import { SideBarContainer, SideBarContent } from './styles';
@@ -16,7 +17,7 @@ const Sidebar = () => {
 
   return (
     <SideBarContainer>
-      <img src={logo} />
+      <img src={logo} alt="Logo" />
       <SideBarContent>
         <SidebarItem Icon={LuLayoutDashboard} Text="Dashboard" route="/" />
         <p>JOGADORES</p>

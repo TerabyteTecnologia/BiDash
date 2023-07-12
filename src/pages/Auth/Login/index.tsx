@@ -59,7 +59,7 @@ export const Login = () => {
     <LoginContainer>
       <LoginContent>
         <header>
-          <img src={logo} />
+          <img src={logo} alt="Logo" />
         </header>
 
 

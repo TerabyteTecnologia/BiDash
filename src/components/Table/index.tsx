@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ResponsiveContainer, TransactionsContainer, TransactionsTable } from "./styles";
+import { TransactionsTable } from "./styles";
 
 function objectValues<T extends {}>(obj: T) {
   return Object.keys(obj).map((objKey) => obj[objKey as keyof T]);
@@ -19,9 +19,6 @@ function isPrimitive(value: any): value is PrimitiveType {
     typeof value === "symbol"
   );
 }
-
-/** Component */
-
 interface MinTableItem {
   id: PrimitiveType;
 }

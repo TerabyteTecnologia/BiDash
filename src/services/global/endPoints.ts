@@ -1,4 +1,4 @@
-import { LoginProps, RegisterProps } from "../../contexts/Auth/interface";
+import { LoginProps } from "../../contexts/Auth/interface";
 import api from "./api";
 
 export const loginPost = (data: LoginProps) => {

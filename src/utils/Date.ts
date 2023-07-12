@@ -3,8 +3,6 @@ import { Dispatch, SetStateAction } from "react";
 import { addMonths, differenceInDays, format, isBefore, parseISO, subMonths } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
-const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
-
 export const calculateAge = (dateOfBirth: any): number => {
 
   const currentDate = new Date();
@@ -43,7 +41,7 @@ export const getMaxDateInSearchFilter = () => {
 export const DateOutputStr = (dateStr?: string, patternStr?: string) => {
   if (!dateStr) return '';
   const pattern = patternStr || 'dd/MM/yyyy HH:mm';
-  return format(parseISO(dateStr), pattern, { timeZone, locale: ptBR });
+  return format(parseISO(dateStr), pattern, { locale: ptBR });
 };
 
 export const calcDataTo = (period: any, newDate: string, setPeriod: Dispatch<SetStateAction<any>>) => {
@@ -77,8 +75,8 @@ export const calcDataFrom = (period: any, newDate: string, setPeriod: Dispatch<S
 
 export function calculateDateDifference(fromDate: string, toDate: string): number {
   const oneDay = 24 * 60 * 60 * 1000; // Milissegundos em um dia
-  const startDate = new Date(fromDate);
-  const endDate = new Date(toDate);
+  const startDate = new Date(fromDate) as any;
+  const endDate = new Date(toDate) as any;
   const diffInDays = Math.round(Math.abs((startDate - endDate) / oneDay));
   return diffInDays;
 }

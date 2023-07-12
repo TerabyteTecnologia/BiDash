@@ -1,8 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { LuCalendarHeart } from "react-icons/lu";
-
-
 export const ContainerHome = styled.div`
   display: block;
   flex-direction: column;
