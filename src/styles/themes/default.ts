@@ -3,7 +3,6 @@ export const themeDefault = () => {
   return {
     'white': '#FFFFFF',
 
-    'gray-100': '#E1E1E6',
     'green-200': '#9FE872',
     'green-300': '#00BA75',
     'green-700': '#448919',
@@ -14,6 +13,7 @@ export const themeDefault = () => {
 
     'yellow-500': '#FBA94C',
 
+    'gray-100': '#E1E1E6',
     'gray-300': '#989898',
     'gray-400': '#272727',
     'gray-500': '#343541',
@@ -22,8 +22,6 @@ export const themeDefault = () => {
 
     'blue-200': '#229ED9',
     'blue-300': '#2D6388'
-
-
   };
 };
 

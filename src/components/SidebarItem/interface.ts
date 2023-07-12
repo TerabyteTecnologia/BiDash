@@ -1,4 +1,5 @@
 export interface SideBarItemProps {
-  Icon: any;
+  Icon: React.ElementType;
   Text: string;
+  route: string;
 }

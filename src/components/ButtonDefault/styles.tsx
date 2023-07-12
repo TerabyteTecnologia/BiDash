@@ -8,8 +8,8 @@ export const Button = styled.button`
   border: 0;
   border-radius: 0.375rem;
 
-  background: ${props => props.theme["background-btn"]};
-  color:  ${props => props.theme["color_btn"]};
+  background: ${props => props.theme["blue-200"]};
+  color:  ${props => props.theme["white"]};
 
   padding: 0 1.25rem;
   height: 3.125rem;

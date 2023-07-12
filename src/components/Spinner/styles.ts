@@ -22,7 +22,7 @@ export const StyledSpinner = styled.span`
 
   &:after {
     transform: rotate3d(90, 90, 0, 180deg );
-    border-color: #FF3D00;
+    border-color: ${props => props.theme["white"]};
   }
 
   @keyframes rotate {

@@ -2,26 +2,14 @@ import { LoginProps, RegisterProps } from "../../contexts/Auth/interface";
 import api from "./api";
 
 export const loginPost = (data: LoginProps) => {
-  return Promise.resolve(api.post("/authenticate", data));
+  return Promise.resolve(api.post("/usuario/authenticate", data));
 };
 
-export const registerEndPoint = (data: RegisterProps) => {
-  return Promise.resolve(api.post("/register", data));
+export const getReportHome = (data: any) => {
+  return Promise.resolve(api.get("/relatorio/relatoriodash", {
+    params: data
+  }));
 };
-
-
-export const getIncomeAndExpenses = (data: RegisterProps) => {
-  return Promise.resolve(api.post("/register", data));
-};
-
-export const getCategories = () => {
-  return Promise.resolve(api.get("/Category/GetCategories"));
-};
-
-export const postAddIncomeOrExpenses = (data: any) => {
-  return Promise.resolve(api.post("/IncomeAndExpenses/AddIncomeAndExpenses", data));
-};
-
 
 export const saveTokenLocalStorage = (token: string) => {
   localStorage.setItem('@app-hack:token-1.0.0', token);

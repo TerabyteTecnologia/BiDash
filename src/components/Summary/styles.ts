@@ -1,21 +1,12 @@
 import styled, { css } from "styled-components";
 
-export const SummaryContainer = styled.div`
-  width: 100%;
-  max-width: 1800px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-`;
-
 interface SummaryCardProps {
   variant?: "green" | "blue" | "red";
 }
 
 export const SummaryCard = styled.div<SummaryCardProps>`
   background: ${props => props.theme["gray-600"]};
-  border-radius: 6px;
+  border-radius: 0.375rem;
   padding: 2rem;
   header {
     display: flex;

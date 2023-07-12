@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +12,7 @@ import {
 } from 'chart.js';
 
 import { Bar } from 'react-chartjs-2';
+import { VerticalBarProps } from './interface';
 
 ChartJS.register(
   CategoryScale,
@@ -26,40 +26,67 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
+export function VerticalBarComponent(props: VerticalBarProps) {
+
+  const { labels, values, title } = props;
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+        labels: {
+          font: {
+            size: 18
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: title,
+        font: {
+          size: 18,
+          weight: 'bold'
+        }
+      },
+      tooltip: {
+        bodyFont: {
+          size: 18
+        },
+      },
     },
-    title: {
-      display: true,
-      text: 'Registro AVG',
+    scales: {
+      x: {
+        ticks: {
+          font: {
+            size: 18
+          },
+        },
+      },
+      y: {
+        ticks: {
+          font: {
+            size: 18
+          },
+        },
+      },
     },
-  },
-};
+  };
 
-const labels = ['MG', 'SP', 'AM', 'RJ'];
-
-const dataArray = ['12', '58', '96', '120'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: 'Dataset 2',
-      data: dataArray,
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
-
-export function VerticalBarComponent() {
+  const objBuilderGraphic = {
+    labels,
+    datasets: [
+      {
+        fill: true,
+        label: "Jogadores",
+        data: values,
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
 
   return (
-    <Bar options={options} data={data} />
+    <Bar options={options} data={objBuilderGraphic} />
   );
 }

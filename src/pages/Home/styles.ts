@@ -1,4 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+import { LuCalendarHeart } from "react-icons/lu";
+
 
 export const ContainerHome = styled.div`
   display: block;
@@ -9,7 +12,6 @@ export const ContainerHome = styled.div`
 `;
 
 export const ContentHome = styled.div`
-  max-width: 1200px;
   margin: 0 auto
 `;
 
@@ -17,15 +19,15 @@ export const HomeFilter = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
 
   button {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.3125rem;
     background: ${props => props.theme["blue-200"]};
     color: ${props => props.theme["white"]};
-    padding: 5px 10px;
+    padding: 0.9375rem;
     border-radius: 0.3125rem;
     border: none;
     cursor: pointer;
@@ -36,8 +38,57 @@ export const HomeFilter = styled.div`
   }
 `;
 
+export const ToggleSwitchContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap:0.625rem;
+
+  padding-right: 2.5rem;
+`;
+
+interface ToggleButtonProps {
+  isChecked: boolean;
+}
+
+export const ToggleButton = styled.label<ToggleButtonProps>`
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: gray;
+  cursor: pointer;
+
+  input {
+    display: none;
+  }
+
+  span {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: white;
+    transition: transform 0.2s;
+  }
+
+  ${props => props.isChecked === true && css`
+    background-color: red;
+
+    span {
+      transform: translateX(20px);
+    }
+  `}
+`;
+
 export const ContentSummary = styled.div`
-  margin: 20px 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 1.25rem 0;
 `;
 
 export const BackgroundHome = styled.div`
@@ -52,25 +103,45 @@ export const BackgroundHome = styled.div`
   padding: 0.9375rem 6.25rem;
 
   border-radius: 0.625rem;
+
+  @media (max-width: 1400px) {
+    padding: 0.9375rem 1.25rem;
+  }
+
 `;
 
 export const FlexHome = styled.div`
   display: flex;
   justify-content: center;
   gap: 1.25rem;
+
+  width: 100%;
+  height: auto;
 `;
 
 export const ContentFlexHome = styled(BackgroundHome)`
   width: 100%;
 `;
 
-export const ContentTable = styled(BackgroundHome)`
-  justify-content: start;
+export const ContentTable = styled.div`
   width: 100%;
-  height: 31.25rem;
+  height: auto;
 
+  margin: 0 auto 0.9375rem auto;
+  padding: 0.9375rem 6.25rem;
+
+  background: ${props => props.theme["gray-400"]};
+  border-radius: 0.625rem;
+  overflow-x: auto;
+  
   p {
     font-size: 1.25rem;
-    padding: 20px 0;
+    padding: 1.25rem 0;
+    text-align: center;
+  }
+
+  @media (max-width: 1400px) {
+    max-width: 1000px;
+    padding: 0.9375rem 2.25rem;
   }
 `;

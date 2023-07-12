@@ -1,11 +1,7 @@
 import {
-  FaHome,
-  FaEnvelope,
-  FaRegSun,
-  FaUserAlt,
-  FaIdCardAlt,
-  FaRegFileAlt,
-  FaRegCalendarAlt,
+  FaUserCog,
+  FaBalanceScale,
+  FaUserCheck,
   FaChartBar
 } from 'react-icons/fa';
 
@@ -18,22 +14,21 @@ import { SideBarContainer, SideBarContent } from './styles';
 
 const Sidebar = () => {
 
-
   return (
     <SideBarContainer>
       <img src={logo} />
       <SideBarContent>
-        <SidebarItem Icon={LuLayoutDashboard} Text="Dashboard" />
+        <SidebarItem Icon={LuLayoutDashboard} Text="Dashboard" route="/" />
         <p>JOGADORES</p>
-        <SidebarItem Icon={FaHome} Text="Home" />
+        <SidebarItem Icon={FaUserCheck} Text="Registros" route="/" />
         <p>PAGAMENTOS</p>
-        <SidebarItem Icon={FaChartBar} Text="Statistics" />
+        <SidebarItem Icon={FaBalanceScale} Text="Registros" route="/payments" />
         <p>LIVROS DE ESPORTES</p>
-        <SidebarItem Icon={FaUserAlt} Text="Users" />
+        <SidebarItem Icon={FaChartBar} Text="Registros" route="/" />
         <p>CASSINO</p>
-        <SidebarItem Icon={FaEnvelope} Text="Mail" />
+        <SidebarItem Icon={FaChartBar} Text="Registros" route="/" />
         <p>CONFIGURAÇÕES</p>
-        <SidebarItem Icon={FaRegSun} Text="Settings" />
+        <SidebarItem Icon={FaUserCog} Text="Usuários" route="/" />
       </SideBarContent>
     </SideBarContainer>
   );

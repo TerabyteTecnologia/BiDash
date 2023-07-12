@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { TransactionsContainer, TransactionsTable } from "./styles";
+import { ResponsiveContainer, TransactionsContainer, TransactionsTable } from "./styles";
 
 function objectValues<T extends {}>(obj: T) {
   return Object.keys(obj).map((objKey) => obj[objKey as keyof T]);

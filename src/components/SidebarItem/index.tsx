@@ -1,15 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import { SideBarItemProps } from './interface';
-import { Container } from './styles';
+import { ContainerSideBarItem } from './styles';
 
 const SidebarItem = (props: SideBarItemProps) => {
 
-  const { Icon, Text } = props;
+  const { Icon, Text, route } = props;
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(route);
+  };
 
   return (
-    <Container role="button">
+    <ContainerSideBarItem role="button" onClick={handleNavigate}>
       <Icon />
       {Text}
-    </Container>
+    </ContainerSideBarItem>
   );
 };
 

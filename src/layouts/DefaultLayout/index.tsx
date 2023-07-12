@@ -3,6 +3,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import Sidebar from '../../components/SideBar';
+import { useAuth } from '../../contexts/Auth';
+
 import {
   DefaultLayoutHeader,
   DefaultLayoutOutlet,
@@ -12,12 +14,11 @@ import {
 
 export function PrivateRoutes() {
 
-  // const { isAuthentication } = useAuth();
-  const isAuthentication = true;
+  const { isAuthentication } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (false || !isAuthentication)
+    if (!isAuthentication)
       navigate("/login");
 
   }, [isAuthentication]);

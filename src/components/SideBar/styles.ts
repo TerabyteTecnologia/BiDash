@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const SideBarContainer = styled.div`
-  background-color: #171923;
+  background: ${props => props.theme["gray-400"]};
+
   position: fixed;
   height: 100%;
   top: 0px;
   left: 0px;
-  width: 300px;
+  width: 18.75rem;
   animation: showSidebar .4s;
 
   padding: 1.25rem;
@@ -34,7 +35,7 @@ export const SideBarContainer = styled.div`
 `;
 
 export const SideBarContent = styled.div`
-  margin-top: 50px;
+  margin-top: 3.125rem;
   
   p {
     color: ${props => props.theme["gray-300"]};

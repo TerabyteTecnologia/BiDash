@@ -6,6 +6,9 @@ import { ButtonDefault } from "../../../components/ButtonDefault";
 import { Input } from "../../../components/Input";
 import { Spinner } from "../../../components/Spinner";
 import { useAuth } from "../../../contexts/Auth";
+
+import logo from '../../../assets/icons/logoTeraByte.svg';
+
 import { FormData } from "./interface";
 
 import {
@@ -16,14 +19,15 @@ import {
   TextRegister
 } from "./styles";
 
-
 export const Login = () => {
 
-  const { isAuthentication, login } = useAuth();
+  const { isAuthentication, authentication, isLoading } = useAuth();
 
   const [formData, setFormData] = useState<FormData>({
     email: '',
+    password: ''
   });
+
 
   const navigate = useNavigate();
 
@@ -45,19 +49,19 @@ export const Login = () => {
 
     const dataLogin = {
       "email": formData.email,
+      "senha": formData.password
     };
 
-    login(dataLogin);
-
+    authentication(dataLogin);
   }
 
   return (
     <LoginContainer>
       <LoginContent>
         <header>
-          <p> Bem Vindo</p>
-          <span>Insira o e-mail utilizado no cadastro</span>
+          <img src={logo} />
         </header>
+
 
         <LoginForm onSubmit={handleSubmit}>
           <LoginFormGroup>
@@ -72,13 +76,25 @@ export const Login = () => {
             />
           </LoginFormGroup>
 
+          <LoginFormGroup>
+            <Input
+              type="password"
+              id="password"
+              name="password"
+              label=""
+              placeholder="Senha"
+              value={formData.password}
+              onChange={handleChange}
+              isLogin
+            />
+          </LoginFormGroup>
+
+
           <ButtonDefault
             type="submit"
-          // disabled={loginMutation.isLoading}
+            disabled={isLoading}
           >
-            Acessar
-
-            {/* {loginMutation.isLoading ? <Spinner /> : "Acessar"} */}
+            {isLoading ? <Spinner /> : "Acessar"}
           </ButtonDefault>
         </LoginForm>
 
