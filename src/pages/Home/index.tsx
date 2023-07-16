@@ -1,19 +1,17 @@
-import { useState, ChangeEvent, useEffect } from 'react';
-
-import { FaSearch } from "react-icons/fa";
-
-import { AreaChartComponent } from "../../components/Charts/AreaChart";
-import { PieChartComponent } from "../../components/Charts/PieChart";
-import { VerticalBarComponent } from "../../components/Charts/VerticalBarChart";
-import { Pagination } from "../../components/Pagination";
-import { Summary } from '../../components/Summary';
-import TableRows from '../../components/TableRow';
-
-import { getReportHome } from '../../services/global/endPoints';
+import { useState, useEffect } from 'react';
 
 import { TiGroup } from "react-icons/ti";
 import { BsCheckCircle } from "react-icons/bs";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+
+import { VerticalBarComponent } from "../../components/Charts/VerticalBarChart";
+import { AreaChartComponent } from "../../components/Charts/AreaChart";
+import { PieChartComponent } from "../../components/Charts/PieChart";
+import { FilterSearch } from '../../components/FilterSearch';
+import { Pagination } from "../../components/Pagination";
+import { Visibility } from '../../components/Visibility';
+import { Summary } from '../../components/Summary';
+import TableRows from '../../components/TableRow';
 
 import {
   GraphicAgeProps,
@@ -23,17 +21,12 @@ import {
   PlayerFilterProps,
   PlayerProps
 } from './interface';
-import {
-  DateOutputStr,
-  calcDataFrom,
-  calcDataTo,
-  calculateAge,
-  calculateDateDifference,
-  formatDate,
-  getMaxDateInSearchFilter,
-  getMinDateInSearchFilter
-} from '../../utils/Date';
+
+import { getReportHome } from '../../services/global/endPoints';
+
+import { calculateAge, calculateDateDifference, formatDate } from '../../utils/Date';
 import { useToast } from '../../hooks/useToast';
+import { useFilterSearch } from '../../contexts/FilterSearch';
 
 import {
   ContainerHome,
@@ -42,12 +35,8 @@ import {
   ContentSummary,
   ContentTable,
   FlexHome,
-  HomeFilter,
   ContentHome,
-  ToggleButton,
-  ToggleSwitchContent
 } from "./styles";
-import { Visibility } from '../../components/Visibility';
 
 export function Home() {
 
@@ -55,19 +44,16 @@ export function Home() {
 
   const { toast } = useToast();
 
+  const { dateFilter, isTest } = useFilterSearch();
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
 
-  const [isChecked, setIsChecked] = useState<boolean>(false);
   const [showAreaChart, setShowAreaChart] = useState<boolean>(false);
 
   useEffect(() => {
     getLoadDataHome();
   }, []);
-
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
-  };
 
   const [playerCountDate, setPlayerCountDate] = useState<PlayerProps>({
     activePlayer: 0,
@@ -97,25 +83,11 @@ export function Home() {
     sortedQuantitiesByGender: []
   });
 
-  const [dateFilter, setDateFilter] = useState({
-    from: getMinDateInSearchFilter() ?
-      DateOutputStr(getMinDateInSearchFilter().toISOString(), 'yyyy-MM-dd') : '',
-    to: getMaxDateInSearchFilter() ?
-      DateOutputStr(getMaxDateInSearchFilter().toISOString(), 'yyyy-MM-dd') : '',
-  });
-
-  const handleDateFirst = (e: ChangeEvent<HTMLInputElement>) => {
-    setDateFilter({ ...dateFilter, from: e.target.value });
-  };
-
-  const handleDateEnd = (e: ChangeEvent<HTMLInputElement>) => {
-    setDateFilter({ ...dateFilter, to: e.target.value });
-  };
-
   const handleSearchGraphic = () => {
     if (dateFilter.from === '' || dateFilter.to === '') {
       toast.error("Data é obrigatório");
     }
+
     getLoadDataHome();
   };
 
@@ -125,12 +97,12 @@ export function Home() {
     const filter = {
       dataStart: dateFilter.from,
       dataFinal: dateFilter.to,
-      isActive: isChecked
+      isActive: isTest
     };
 
     getReportHome(filter).then(result => {
 
-      if (result) {
+      if (result.data) {
         setPlayerCountDate({
           activePlayer: result.data.activePlayer,
           disabledPlayer: result.data.disabledPlayer,
@@ -191,41 +163,8 @@ export function Home() {
   return (
     <ContainerHome>
       <ContentHome>
-        <HomeFilter>
 
-          <ToggleSwitchContent>
-            <ToggleButton isChecked={isChecked}>
-              <input type="checkbox" defaultChecked={isChecked} onChange={handleToggle} />
-              <span />
-            </ToggleButton>
-            <p>Jogador Teste</p>
-          </ToggleSwitchContent>
-
-          <input
-            className="flex-1"
-            value={dateFilter.from}
-            onChange={handleDateFirst}
-            type="date"
-            max={dateFilter.to}
-            placeholder="Início"
-            onBlur={() => calcDataTo(dateFilter, "end", setDateFilter)}
-          /> a
-          <input
-            value={dateFilter.to}
-            onChange={handleDateEnd}
-            className="flex-1"
-            type="date"
-            min={dateFilter.from}
-            placeholder="Fim"
-            onBlur={() => calcDataFrom(dateFilter, "start", setDateFilter)}
-          />
-
-          <button onClick={handleSearchGraphic}>
-            <FaSearch />
-            Pesquisar
-          </button>
-
-        </HomeFilter>
+        <FilterSearch handleSearch={handleSearchGraphic} showPlayerTest />
 
         <ContentSummary>
           <Summary
@@ -277,6 +216,7 @@ export function Home() {
             />
           </ContentFlexHome>
 
+
           <ContentFlexHome>
             <PieChartComponent
               labels={graphicGenderData.sortedGenders}
@@ -284,6 +224,7 @@ export function Home() {
               title="Quantidade de Jogadores"
             />
           </ContentFlexHome>
+
         </FlexHome>
 
         <FlexHome>

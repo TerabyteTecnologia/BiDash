@@ -2,12 +2,19 @@ import styled, { css } from "styled-components";
 
 interface SummaryCardProps {
   variant?: "green" | "blue" | "red";
+  isIcon?: boolean;
 }
 
 export const SummaryCard = styled.div<SummaryCardProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.9375rem;
+
   background: ${props => props.theme["gray-600"]};
   border-radius: 0.375rem;
   padding: 2rem;
+
   header {
     display: flex;
     align-items: center;
@@ -15,16 +22,34 @@ export const SummaryCard = styled.div<SummaryCardProps>`
     color: ${props => props.theme["white"]};
 
     span {
+      font-size: clamp(1rem, 1.5vw, 1.875rem); 
       font-weight: bold;
-      font-size: 1.25rem;
     }
   }
   
   strong {
     display: block;
-    margin-top: 1rem;
-    font-size: 2.5rem;
+    font-size: clamp(1.25rem, 2.5vw, 3.125rem); 
   }
+
+  svg {
+    width: 3.125rem;
+    height: 3.125rem;
+  }
+
+  @media (max-width: 1400px) {
+    svg {
+      width: 2.1875rem;
+      height: 2.1875rem;
+    }
+  }
+
+  ${props => props.isIcon === false && css`
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 1rem;
+  `}
 
   ${props => props.variant === "blue" && css`
     header, strong {

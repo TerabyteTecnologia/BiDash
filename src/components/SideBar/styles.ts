@@ -5,16 +5,15 @@ export const SideBarContainer = styled.div`
 
   position: fixed;
   height: 100%;
-  top: 0px;
-  left: 0px;
+  top: 0rem;
+  left: 0rem;
   width: 18.75rem;
   animation: showSidebar .4s;
 
   padding: 1.25rem;
 
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+  overflow-x: auto;
 
   > svg {
     position: fixed;

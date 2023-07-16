@@ -7,19 +7,22 @@ import { Router } from './routes/index';
 import { GlobalStyle } from './styles/global';
 import { themeDefault } from "./styles/themes/default";
 import { AuthContextProvider } from './contexts/Auth';
+import { FilterSearchContextProvider } from './contexts/FilterSearch';
 
 function App() {
 
   return (
     <ThemeProvider theme={themeDefault}>
       <AuthContextProvider>
+        <FilterSearchContextProvider>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
 
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+          <GlobalStyle />
+          <Toaster position='top-right' />
 
-        <GlobalStyle />
-        <Toaster position='top-right' />
+        </FilterSearchContextProvider>
       </AuthContextProvider>
     </ThemeProvider>
   );

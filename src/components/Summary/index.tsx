@@ -5,13 +5,14 @@ export function Summary(props: SummaryProps) {
 
   const { variant, text, value, Icon } = props;
 
+  const haveIcon = Boolean(Icon);
+
   return (
-    <SummaryCard variant={variant}>
+    <SummaryCard variant={variant} isIcon={haveIcon}>
       <header>
         <span>{text}</span>
-        {Icon}
+        {Icon && <>{Icon}</>}
       </header>
-
       <strong>{value}</strong>
     </SummaryCard>
   );

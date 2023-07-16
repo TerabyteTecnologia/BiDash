@@ -4,21 +4,12 @@ export const FooterContainer = styled.footer`
   background: ${props => props.theme["gray-700"]};
   padding: 20px;
   text-align: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
-`;
 
-export const FooterContent = styled.p`
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
+  font-weight: bold;
 
-  max-width: 650px;
-  gap: 3.125rem;
-
-  div {
+  a {
+    color: ${props => props.theme["blue-200"]};
     cursor: pointer;
   }
 `;

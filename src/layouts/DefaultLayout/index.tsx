@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
+import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import Sidebar from '../../components/SideBar';
 import { useAuth } from '../../contexts/Auth';
 
 import {
+  DefaultLayoutFooter,
   DefaultLayoutHeader,
   DefaultLayoutOutlet,
   DefaultLayoutSection,
@@ -29,6 +31,7 @@ export function PrivateRoutes() {
       <DefaultLayoutHeader> <Header /></DefaultLayoutHeader>
       <DefaultLayoutSidebar> <Sidebar /></DefaultLayoutSidebar>
       <DefaultLayoutOutlet> <Outlet /></DefaultLayoutOutlet>
+      <DefaultLayoutFooter> <Footer /></DefaultLayoutFooter>
     </DefaultLayoutSection>
 
   );

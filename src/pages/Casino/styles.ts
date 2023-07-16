@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ContainerHome = styled.div`
+export const ContainerCasino = styled.div`
   display: block;
   flex-direction: column;
   padding: 1.25rem;
@@ -8,11 +8,17 @@ export const ContainerHome = styled.div`
 	background: ${props => props.theme["gray-500"]};
 `;
 
-export const ContentHome = styled.div`
+export const ContentCasino = styled.div`
   margin: 0 auto
 `;
 
-export const ContentSummary = styled.div`
+
+export const OperationFlexCasino = styled.div`
+  display: flex;
+  gap: 1.25rem;
+`;
+
+export const ContentSummaryCasino = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -20,26 +26,8 @@ export const ContentSummary = styled.div`
   margin: 1.25rem 0;
 `;
 
-export const BackgroundHome = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background: ${props => props.theme["gray-400"]};
 
-  height: 40.625rem;
-  margin: 0 auto 0.9375rem auto;
-  padding: 0.9375rem 6.25rem;
-
-  border-radius: 0.625rem;
-
-  @media (max-width: 1400px) {
-    padding: 0.9375rem 1.25rem;
-  }
-
-`;
-
-export const FlexHome = styled.div`
+export const FlexHomeCasino = styled.div`
   display: flex;
   justify-content: center;
   gap: 1.25rem;
@@ -48,11 +36,7 @@ export const FlexHome = styled.div`
   height: auto;
 `;
 
-export const ContentFlexHome = styled(BackgroundHome)`
-  width: 100%;
-`;
-
-export const ContentTable = styled.div`
+export const ContentTableCasino = styled.div`
   width: 100%;
   height: auto;
 
@@ -67,12 +51,16 @@ export const ContentTable = styled.div`
     font-size: 1.25rem;
     padding: 1.25rem 0;
     text-align: center;
-
-    font-weight: bold;
   }
 
   @media (max-width: 1400px) {
     max-width: 1000px;
     padding: 0.9375rem 2.25rem;
   }
+`;
+
+export const ColumnSummaryCasino = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.9375rem;
 `;

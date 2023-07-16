@@ -23,11 +23,11 @@ const Sidebar = () => {
         <p>JOGADORES</p>
         <SidebarItem Icon={FaUserCheck} Text="Registros" route="/" />
         <p>PAGAMENTOS</p>
-        <SidebarItem Icon={FaBalanceScale} Text="Registros" route="/payments" />
+        <SidebarItem Icon={FaBalanceScale} Text="Registros" route="/pagamentos" />
         <p>LIVROS DE ESPORTES</p>
-        <SidebarItem Icon={FaChartBar} Text="Registros" route="/" />
+        <SidebarItem Icon={FaChartBar} Text="Registros" route="/livros-esportes" />
         <p>CASSINO</p>
-        <SidebarItem Icon={FaChartBar} Text="Registros" route="/" />
+        <SidebarItem Icon={FaChartBar} Text="Registros" route="/cassino" />
         <p>CONFIGURAÇÕES</p>
         <SidebarItem Icon={FaUserCog} Text="Usuários" route="/" />
       </SideBarContent>

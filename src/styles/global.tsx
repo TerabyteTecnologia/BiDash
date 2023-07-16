@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font: 400 1rem Inter, sans-serif;
+    font: 400 1rem Quicksand, sans-serif;
     background: ${(props) => props.theme["gray-400"]};
     color: ${(props) => props.theme["white"]};
     -webkit-font-smoothing: antialiased;

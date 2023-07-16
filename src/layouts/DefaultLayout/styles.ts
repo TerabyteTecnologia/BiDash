@@ -7,6 +7,7 @@ export const DefaultLayoutSection = styled.section`
 		"sidenav nav"
 		"sidenav content"
 		"sidenav content"
+		"sidenav footer"
 		;
 `;
 
@@ -21,4 +22,8 @@ export const DefaultLayoutSidebar = styled.div`
 export const DefaultLayoutOutlet = styled.div`
 	grid-area: content;
 	background: ${props => props.theme["gray-400"]};
+`;
+
+export const DefaultLayoutFooter = styled.div`
+	grid-area: footer;
 `;

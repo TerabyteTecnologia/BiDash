@@ -10,6 +10,7 @@ import { AuthContextProps, AuthContextProviderType, LoginProps, messageDefaultEr
 
 import { getTokenLocalStorage, loginPost, saveTokenLocalStorage } from '../../services/global/endPoints';
 import { useToast } from '../../hooks/useToast';
+import { isTokenValid } from '../../utils/Token';
 
 
 const AuthContext = createContext({} as AuthContextProps);
@@ -49,7 +50,9 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
     return false;
   };
 
-  const isAuthentication = !!getTokenLocalStorage(); //token
+  const token = getTokenLocalStorage();
+
+  const isAuthentication: boolean = typeof token === 'string' ? isTokenValid(token) : false;
 
   return (
     <AuthContext.Provider
