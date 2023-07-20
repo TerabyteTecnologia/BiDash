@@ -2,6 +2,8 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { ImCancelCircle } from "react-icons/im";
 import { MdCached } from "react-icons/md";
 
+import { OperationComponentProps } from "./interface";
+
 import {
   BackgroundPayment,
   PaymentContainer,
@@ -10,34 +12,36 @@ import {
   PaymentItem
 } from "./style";
 
-export const OperationComponent = () => {
+export const OperationComponent = (props: OperationComponentProps) => {
+
+  const { title, valueOperation } = props;
 
   return (
     <PaymentContainer>
       <BackgroundPayment>
-        <p>Deposit Operations</p>
+        <p>{title}</p>
 
         <PaymentContent>
           <PaymentItem>
             <PaymentFlex>
               <AiOutlineCheckCircle size={32} color="#448919" />
-              <span>Completed</span>
+              <span>Concluído</span>
             </PaymentFlex>
-            <span>930</span>
+            <span>{valueOperation?.COMPLETED || 0}</span>
           </PaymentItem>
           <PaymentItem>
             <PaymentFlex>
               <ImCancelCircle size={32} color="#B20D0D" />
-              <span>Failed</span>
+              <span>Falhou</span>
             </PaymentFlex>
-            <span>60</span>
+            <span>{valueOperation?.FAILED || 0}</span>
           </PaymentItem>
           <PaymentItem>
             <PaymentFlex>
               <MdCached size={32} color="#229ED9" />
-              <span>Processing</span>
+              <span>Em processamento</span>
             </PaymentFlex>
-            <span>302</span>
+            <span>{valueOperation?.PROCESSING || 0}</span>
           </PaymentItem>
         </PaymentContent>
       </BackgroundPayment>

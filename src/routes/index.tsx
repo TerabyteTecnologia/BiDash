@@ -4,6 +4,7 @@ import { Login } from "../pages/Auth/Login";
 import { Home } from "../pages/Home";
 import { Payment } from "../pages/Payment";
 import { Casino } from "../pages/Casino";
+import { SportsBooks } from "../pages/SportsBooks";
 
 export function Router() {
   return (
@@ -12,7 +13,7 @@ export function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/pagamentos" element={<Payment />} />
         <Route path="/cassino" element={<Casino />} />
-        <Route path="/livros-esportes" element={<Casino />} />
+        <Route path="/livros-esportes" element={<SportsBooks />} />
       </Route>
 
       <Route path="/login" element={<Login />} />

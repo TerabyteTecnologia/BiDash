@@ -41,16 +41,13 @@ export const TitleFirstTemplate = styled.div`
 export const BodyFistTemplate = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     gap: 0.625rem;
 `;
 
 export const ContentSecondTemplate = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
-
-  @media (max-width: 1400px) {
-    justify-content: space-evenly;
-  }
 `;

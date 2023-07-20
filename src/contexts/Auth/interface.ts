@@ -2,6 +2,7 @@ import { UserProps } from "../../models/User";
 
 export interface AuthContextProps {
   authentication: (data: LoginProps) => void;
+  handleLogout: () => void;
   isLoading: boolean;
   user: UserProps;
   isAuthentication: boolean;

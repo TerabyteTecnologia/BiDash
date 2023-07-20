@@ -1,9 +1,14 @@
-import { HeaderContainer } from "./styles";
+import MenuDropdown from "../Logout";
+import { HeaderContainer, HeaderIconMenu } from "./styles";
 
 export function Header() {
 
   return (
-    <HeaderContainer />
+    <HeaderContainer>
+      <HeaderIconMenu>
+        <MenuDropdown />
+      </HeaderIconMenu>
+    </HeaderContainer>
   );
 
 }

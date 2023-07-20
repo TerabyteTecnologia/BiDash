@@ -1,3 +1,4 @@
+import { formatCurrency } from '../../utils/Formatter';
 import { Top10SecondTemplateProps } from './interface';
 
 import {
@@ -9,7 +10,7 @@ import {
 
 export const Top10SecondTemplateComponent = (props: Top10SecondTemplateProps) => {
 
-  const { IconTitle, title } = props;
+  const { IconTitle, title, data } = props;
 
   return (
     <BackgroundFirstTemplate>
@@ -21,56 +22,12 @@ export const Top10SecondTemplateComponent = (props: Top10SecondTemplateProps) =>
 
       <BodyFistTemplate>
 
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 10.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
-        <ContentSecondTemplate>
-          <span>Nome do jogo</span>
-          <span>   R$ 12.003,00</span>
-        </ContentSecondTemplate>
-
+        {data?.slice(0, 5).map((game: any) => (
+          <ContentSecondTemplate>
+            <span>{game.jogo}</span>
+            <span>  {formatCurrency(game.resultado as number)}</span>
+          </ContentSecondTemplate>
+        ))}
       </BodyFistTemplate>
     </BackgroundFirstTemplate>
   );

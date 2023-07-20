@@ -10,7 +10,6 @@ import top9 from '../../assets/img/top9.png';
 import top10 from '../../assets/img/top10.png';
 import trofeu from '../../assets/img/trofeu.png';
 
-
 import {
   BackgroundFirstTemplate,
   BodyFistTemplate,
@@ -20,7 +19,18 @@ import {
   TitleFirstTemplate
 } from "./styles";
 
-export const Top10FirstTemplateComponent = () => {
+import { PopularGamesProps } from '../../pages/SportsBooks/interface';
+
+interface Top10PopularGame {
+  data?: PopularGamesProps[];
+}
+
+export const Top10FirstTemplateComponent = (props: Top10PopularGame) => {
+
+  const { data } = props;
+
+  const topImagesFirstPart = [top1, top2, top3, top4, top5];
+  const topImagesSecondPart = [top6, top7, top8, top9, top10];
 
   return (
     <BackgroundFirstTemplate>
@@ -34,71 +44,40 @@ export const Top10FirstTemplateComponent = () => {
 
         <ContentFirstTemplate>
           <ColumnTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top1} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top2} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top3} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top4} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top5} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
+
+            {data?.slice(0, 5).map((game: any, index: number) => (
+              <RowTitlePlayerFirstTemplate>
+                <img src={topImagesFirstPart[index]} />
+                <span>{game.jogo}</span>
+              </RowTitlePlayerFirstTemplate>
+            ))}
+
           </ColumnTitlePlayerFirstTemplate>
 
           <ColumnTitlePlayerFirstTemplate>
-            <span>404</span>
-            <span>380</span>
-            <span>366</span>
-            <span>240</span>
-            <span>200</span>
+            {data?.slice(0, 5).map((game: any) => (
+              <span>{game.quantidade}</span>
+            ))}
           </ColumnTitlePlayerFirstTemplate>
         </ContentFirstTemplate>
 
         <ContentFirstTemplate>
           <ColumnTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top6} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top7} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top8} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top9} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
-            <RowTitlePlayerFirstTemplate>
-              <img src={top10} />
-              <span>Nome do jogo</span>
-            </RowTitlePlayerFirstTemplate>
+            {data?.slice(5, 10).map((game: any, index: number) => (
+              <RowTitlePlayerFirstTemplate>
+                <img src={topImagesSecondPart[index]} />
+                <span>{game.jogo}</span>
+              </RowTitlePlayerFirstTemplate>
+            ))}
 
           </ColumnTitlePlayerFirstTemplate>
 
           <ColumnTitlePlayerFirstTemplate>
-            <span>98</span>
-            <span>80</span>
-            <span>63</span>
-            <span>28</span>
-            <span>21</span>
+            {data?.slice(5, 10).map((game) => (
+              <span>{game.quantidade}</span>
+            ))}
           </ColumnTitlePlayerFirstTemplate>
         </ContentFirstTemplate>
-
 
       </BodyFistTemplate>
     </BackgroundFirstTemplate>

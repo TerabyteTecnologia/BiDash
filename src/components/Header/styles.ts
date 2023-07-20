@@ -6,3 +6,10 @@ export const HeaderContainer = styled.header`
   height: 100px;
   display: flex;
 `;
+
+export const HeaderIconMenu = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  padding-right: 60px;
+`;

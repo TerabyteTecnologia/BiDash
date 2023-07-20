@@ -11,11 +11,17 @@ import { IoMdDownload } from "react-icons/io";
 
 import {
   PaymentsTableFilterProps,
-  DataPaymentsProps
+  DataPaymentsProps,
+  InitialOperation,
+  OperationsProps
 } from './interface';
+
+import { formatDate } from '../../utils/Date';
+import { formatCurrency } from '../../utils/Formatter';
 
 import { useToast } from '../../hooks/useToast';
 import { useFilterSearch } from '../../contexts/FilterSearch';
+import { getReportPayment } from '../../services/global/endPoints';
 
 import {
   ContainerPayment,
@@ -32,22 +38,18 @@ export function Payment() {
 
   const { toast } = useToast();
 
-  const { dateFilter } = useFilterSearch();
+  const { dateFilter, isTest } = useFilterSearch();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
 
+  const [dataPayments, setDataPayments] = useState<DataPaymentsProps>(InitialOperation);
+
+  const [playerFilterDate, setPlayerFilterDate] = useState<PaymentsTableFilterProps[]>([]);
+
   useEffect(() => {
     getLoadDataPayment();
   }, []);
-
-  const [dataPayments, setDataPayments] = useState<DataPaymentsProps>({
-    balance: "R$ 0",
-    deposit: "R$ 0",
-    withdrawal: "R$ 0"
-  });
-
-  const [playerFilterDate, setPlayerFilterDate] = useState<PaymentsTableFilterProps[]>([]);
 
   const handleSearchGraphic = () => {
     if (dateFilter.from === '' || dateFilter.to === '') {
@@ -60,13 +62,52 @@ export function Payment() {
   const getLoadDataPayment = async () => {
     setPlayerFilterDate([]);
 
-    setDataPayments({
-      balance: "R$ 5.886,96",
-      deposit: "R$ 19.974,23",
-      withdrawal: "R$ 14.087,51"
-    });
+    const filter = {
+      dataStart: dateFilter.from,
+      dataFinal: dateFilter.to,
+      isActive: isTest
+    };
 
-    setTotalResults(0);
+    getReportPayment(filter).then(result => {
+
+      if (result.data) {
+
+        result.data.paymentFilter.map((filter: any) => {
+          const paymentObj: PaymentsTableFilterProps = {
+            id: filter.id,
+            date: formatDate(filter.date),
+            operation_type: filter.operatin_type,
+            status: filter.status,
+            total: filter.total,
+            quantity: filter.quantity,
+          };
+
+          setPlayerFilterDate((prevData) => [...prevData, paymentObj]);
+        });
+
+        const formattedData: OperationsProps = {
+          DEPOSIT: {
+            COMPLETED: formatCurrency(result.data.operations.DEPOSIT.COMPLETED as number),
+            FAILED: formatCurrency(result.data.operations.DEPOSIT.FAILED as number),
+            PROCESSING: formatCurrency(result.data.operations.DEPOSIT.PROCESSING as number),
+          },
+          WITHDRAWAL: {
+            COMPLETED: formatCurrency(result.data.operations.WITHDRAWAL.COMPLETED as number),
+            FAILED: formatCurrency(result.data.operations.WITHDRAWAL.FAILED as number),
+            PROCESSING: formatCurrency(result.data.operations.WITHDRAWAL.PROCESSING as number),
+          },
+        };
+
+        setDataPayments({
+          balance: result.data.balance,
+          deposit: result.data.deposit,
+          withdrawal: result.data.whtidrawal,
+          operations: formattedData,
+        });
+
+        setTotalResults(result.data.paymentFilter.length);
+      }
+    });
   };
 
   return (
@@ -79,28 +120,28 @@ export function Payment() {
           <Summary
             variant="blue"
             text="Saldo"
-            value={dataPayments.balance}
+            value={dataPayments?.balance || "0"}
             Icon={<MdAccountBalance size={32} color="#229ED9" />}
           />
 
           <Summary
             variant="green"
             text="Depósito"
-            value={dataPayments.deposit}
+            value={dataPayments?.deposit || "0"}
             Icon={<IoMdDownload size={32} color="#448919" />}
           />
 
           <Summary
             variant="red"
             text="Saque"
-            value={dataPayments.withdrawal}
+            value={dataPayments?.withdrawal || "0"}
             Icon={<MdFileUpload size={32} color="#B20D0D" />}
           />
         </ContentSummaryPayment>
 
         <OperationFlexPayment>
-          <OperationComponent />
-          <OperationComponent />
+          <OperationComponent title="Operações de Depósito" valueOperation={dataPayments.operations?.DEPOSIT} />
+          <OperationComponent title="Operações de Saque" valueOperation={dataPayments.operations?.WITHDRAWAL} />
         </OperationFlexPayment>
 
         <FlexPayment>
@@ -110,11 +151,11 @@ export function Payment() {
             <TableRows
               headers={{
                 id: "ID",
-                day: "Day",
-                type: "Type",
+                day: "Data Registro",
+                type: "Tipo",
                 status: "Status",
                 total: "Total",
-                quantity: "Quantity"
+                quantity: "Quantidade"
               }}
               data={playerFilterDate}
               currentPage={currentPage}

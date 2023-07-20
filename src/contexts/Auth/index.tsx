@@ -8,7 +8,7 @@ import {
 import { UserInitial, UserProps } from '../../models/User';
 import { AuthContextProps, AuthContextProviderType, LoginProps, messageDefaultError } from './interface';
 
-import { getTokenLocalStorage, loginPost, saveTokenLocalStorage } from '../../services/global/endPoints';
+import { getTokenLocalStorage, loginPost, saveColorLocalStorage, saveTokenLocalStorage } from '../../services/global/endPoints';
 import { useToast } from '../../hooks/useToast';
 import { isTokenValid } from '../../utils/Token';
 
@@ -50,6 +50,13 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
     return false;
   };
 
+  const handleLogout = () => {
+    saveTokenLocalStorage("");
+    saveColorLocalStorage("");
+
+    window.location.href = "/";
+  };
+
   const token = getTokenLocalStorage();
 
   const isAuthentication: boolean = typeof token === 'string' ? isTokenValid(token) : false;
@@ -58,6 +65,7 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
     <AuthContext.Provider
       value={{
         authentication: (credentials: LoginProps) => authentication(credentials),
+        handleLogout: () => handleLogout(),
         isLoading,
         user,
         isAuthentication
