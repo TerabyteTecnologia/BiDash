@@ -1,8 +1,8 @@
-export interface DataSportsBooksProps {
+export interface DataSportsBookProps {
   total_turnover: string,
   total_profit: string,
   profit_percent: string,
-  total_players: number;
+  total_players: string;
 }
 
 export interface SportsBooksTableFilterProps {
@@ -10,12 +10,7 @@ export interface SportsBooksTableFilterProps {
   day: string,
   turnover: string,
   winnings: string,
-  // profit: string,
-  // profit_percent: string,
-  // qtd_player: number;
-}
-
-export interface PopularGamesProps {
-  jogo: string;
-  quantidade: number;
+  profit: string,
+  profit_percent: string,
+  qtd_player: number;
 }

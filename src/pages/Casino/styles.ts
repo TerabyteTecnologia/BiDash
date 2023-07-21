@@ -16,6 +16,10 @@ export const ContentCasino = styled.div`
 export const OperationFlexCasino = styled.div`
   display: flex;
   gap: 1.25rem;
+
+  @media (max-width: 1400px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const ContentSummaryCasino = styled.div`
