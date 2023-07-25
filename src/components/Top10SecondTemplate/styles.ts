@@ -51,3 +51,9 @@ export const ContentSecondTemplate = styled.div`
   justify-content: space-between;
   width: 100%;
 `;
+
+export const TextDataEmpty = styled.div`
+  text-align: center;
+  font-size: 1.375rem;
+  font-weight: 700;
+`;

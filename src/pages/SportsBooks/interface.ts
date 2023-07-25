@@ -1,16 +1,21 @@
 export interface DataSportsBookProps {
-  total_turnover: string,
-  total_profit: string,
-  profit_percent: string,
-  total_players: string;
+  totalAposta: string,
+  totalReceitaBruta: string,
+  totalPagamento: string,
+  quantidadeJogadoresUnicos: string;
 }
 
 export interface SportsBooksTableFilterProps {
-  name_player: string,
+  category: string,
+  tournament_name: string,
+  sport_name: string,
   day: string,
-  turnover: string,
-  winnings: string,
-  profit: string,
-  profit_percent: string,
-  qtd_player: number;
+  aposta: string,
+  receitaBruta: string,
+  pagamento: string;
+}
+
+export interface PopularGamesProps {
+  jogo: string;
+  quantidade: number;
 }

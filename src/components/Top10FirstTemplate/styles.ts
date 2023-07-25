@@ -65,3 +65,10 @@ export const RowTitlePlayerFirstTemplate = styled.div`
   align-items: center;
   gap: 12px;
 `;
+
+export const TextDataEmpty = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.375rem;
+  font-weight: 700;
+`;

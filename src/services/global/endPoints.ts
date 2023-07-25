@@ -17,11 +17,18 @@ export const getReportPayment = (data: any) => {
   }));
 };
 
-export const getReportSportsBooks = (data: any) => {
+export const getReportCasino = (data: any) => {
   return Promise.resolve(api.get("/relatorio/relatoriodashrecords", {
     params: data
   }));
 };
+
+export const getReportSportsBooks = (data: any) => {
+  return Promise.resolve(api.get("/relatorio/relatoriodashsportbook", {
+    params: data
+  }));
+};
+
 
 export const saveTokenLocalStorage = (token: string) => {
   localStorage.setItem('@app-hack:token-1.0.0', token);

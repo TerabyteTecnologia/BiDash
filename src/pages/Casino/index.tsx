@@ -10,7 +10,7 @@ import TableRows from '../../components/TableRow';
 import { MdFileUpload } from "react-icons/md";
 import { IoMdDownload } from "react-icons/io";
 
-import { getReportSportsBooks } from '../../services/global/endPoints';
+import { getReportCasino } from '../../services/global/endPoints';
 import { useFilterSearch } from '../../contexts/FilterSearch';
 import { useToast } from '../../hooks/useToast';
 
@@ -76,18 +76,19 @@ export function Casino() {
       isActive: isTest
     };
 
-    getReportSportsBooks(filter).then(result => {
+    getReportCasino(filter).then(result => {
 
       if (result.data) {
 
         result.data.recordsFilter.map((filter: any) => {
           const paymentObj: CasinoTableFilterProps = {
             name_player: filter.resultgame.name,
-            day: formatDate(filter.date),
-            turnover: filter.turnover,
-            winnings: filter.winnings,
-            // profit: filter.total,
-            // quantity: filter.quantity,
+            day: formatDate(filter.day),
+            turnover: formatCurrency(filter.totalTurnover as number),
+            winnings: formatCurrency(filter.totalWinnings as number),
+            profit: formatCurrency(filter.profit as number),
+            profit_percent: decimalToPercentage(filter.profitPercent),
+            qtd_player: filter.qtdJogadores,
           };
 
           setPlayerFilterDate((prevData) => [...prevData, paymentObj]);
@@ -172,9 +173,9 @@ export function Casino() {
                 day: "Data Registro",
                 turnover: "Turnover",
                 winnings: "Winnings",
-                // profit: "Profit",
-                // profit_percent: "Profit %",
-                // qtd_player: "Qtd. Jogadores"
+                profit: "Profit",
+                profit_percent: "Profit %",
+                qtd_player: "Qtd. Jogadores"
               }}
               data={playerFilterDate}
               currentPage={currentPage}

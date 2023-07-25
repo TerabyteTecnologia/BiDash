@@ -72,7 +72,7 @@ export const ContentTable = styled.div`
   }
 
   @media (max-width: 1400px) {
-    max-width: 1000px;
+    max-width: 900px;
     padding: 0.9375rem 2.25rem;
   }
 `;

@@ -10,9 +10,9 @@ export interface CasinoTableFilterProps {
   day: string,
   turnover: string,
   winnings: string,
-  // profit: string,
-  // profit_percent: string,
-  // qtd_player: number;
+  profit: string,
+  profit_percent: string,
+  qtd_player: number;
 }
 
 export interface PopularGamesProps {
