@@ -28,8 +28,8 @@ const Sidebar = () => {
         <SidebarItem Icon={FaChartBar} Text="Registros" route="/cassino" />
         <p>LIVROS DE ESPORTES</p>
         <SidebarItem Icon={FaChartBar} Text="Registros" route="/livros-esportes" />
-        <p>CONFIGURAÇÕES</p>
-        <SidebarItem Icon={FaUserCog} Text="Usuários" route="/" />
+        {/* <p>CONFIGURAÇÕES</p>
+        <SidebarItem Icon={FaUserCog} Text="Usuários" route="/" /> */}
       </SideBarContent>
     </SideBarContainer>
   );
