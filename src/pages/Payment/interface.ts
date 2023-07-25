@@ -1,6 +1,6 @@
 export const InitialOperation = {
-  balance: 0,
-  deposit: 0,
+  balance: "R$ 0",
+  deposit: "R$ 0",
   operations: {
     DEPOSIT: {
       COMPLETED: "R$ 0",
@@ -13,13 +13,13 @@ export const InitialOperation = {
       PROCESSING: "R$ 0"
     }
   },
-  withdrawal: 0
+  withdrawal: "R$ 0"
 };
 
 export interface DataPaymentsProps {
-  balance: number;
-  deposit: number;
-  withdrawal: number;
+  balance: string;
+  deposit: string;
+  withdrawal: string;
   operations: OperationsProps;
 }
 

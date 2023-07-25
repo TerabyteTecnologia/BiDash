@@ -99,9 +99,9 @@ export function Payment() {
         };
 
         setDataPayments({
-          balance: result.data.balance,
-          deposit: result.data.deposit,
-          withdrawal: result.data.whtidrawal,
+          balance: formatCurrency(result.data.balance as number),
+          deposit: formatCurrency(result.data.deposit as number),
+          withdrawal: formatCurrency(result.data.whtidrawal as number),
           operations: formattedData,
         });
 
