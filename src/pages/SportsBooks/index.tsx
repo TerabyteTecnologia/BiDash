@@ -30,9 +30,12 @@ import {
   ContentCasino,
   ContentSummaryCasino,
   ContentTableCasino,
+  DivSpinnerSportsBook,
   FlexHomeCasino,
   OperationFlexCasino
 } from './styles';
+import { Visibility } from '../../components/Visibility';
+import { Spinner } from '../../components/Spinner';
 
 export function SportsBooks() {
 
@@ -42,6 +45,7 @@ export function SportsBooks() {
 
   const { dateFilter, isTest } = useFilterSearch();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
 
@@ -59,7 +63,7 @@ export function SportsBooks() {
   });
 
   useEffect(() => {
-    getLoadDataCasino();
+    getLoadDataSportsBook();
   }, []);
 
   const handleSearchGraphic = () => {
@@ -67,11 +71,13 @@ export function SportsBooks() {
       toast.error("Data é obrigatório");
     }
 
-    getLoadDataCasino();
+    getLoadDataSportsBook();
   };
 
-  const getLoadDataCasino = async () => {
+  const getLoadDataSportsBook = async () => {
     setPlayerFilterDate([]);
+    setLoading(true);
+    setTotalResults(0);
 
     const filter = {
       dataStart: dateFilter.from,
@@ -109,6 +115,7 @@ export function SportsBooks() {
         });
 
         setTotalResults(result.data.groupedByDayAndResultGame.length);
+        setLoading(false);
       }
     });
   };
@@ -119,79 +126,89 @@ export function SportsBooks() {
 
         <FilterSearch handleSearch={handleSearchGraphic} showPlayerTest />
 
-        <ContentSummaryCasino>
-          <Summary
-            variant="blue"
-            text="Total em Apostas"
-            value={dataCasinos.totalAposta}
-            Icon={<MdFileUpload size={32} color="#229ED9" />}
-          />
+        <Visibility visible={loading}>
+          <DivSpinnerSportsBook>
+            <Spinner />
+          </DivSpinnerSportsBook>
+        </Visibility>
 
-          <Summary
-            variant="green"
-            text="Receita Bruta Total"
-            value={dataCasinos.totalReceitaBruta}
-            Icon={<MdFileUpload size={32} color="#448919" />}
-          />
+        <Visibility visible={!loading}>
 
-          <ColumnSummaryCasino>
-            <Summary
-              variant="green"
-              text="Total em pagamentos"
-              value={dataCasinos.totalPagamento}
-            />
-
+          <ContentSummaryCasino>
             <Summary
               variant="blue"
-              text="Total Jogadores"
-              value={dataCasinos.quantidadeJogadoresUnicos}
-            />
-          </ColumnSummaryCasino>
-        </ContentSummaryCasino>
-
-        <OperationFlexCasino>
-          <Top10FirstTemplateComponent data={top10PopularGames} />
-        </OperationFlexCasino>
-
-        <OperationFlexCasino>
-          <Top10SecondTemplateComponent
-            IconTitle={<MdFileUpload size={32} color="#9FE872" />}
-            title="Top 10 Mais Lucrativos"
-            data={top10ProfitableGames}
-          />
-          <Top10SecondTemplateComponent
-            IconTitle={<IoMdDownload size={32} color="#E85353" />}
-            title="Top 10 Mais Prejuízos"
-            data={top10DamageGames}
-          />
-        </OperationFlexCasino>
-
-        <FlexHomeCasino>
-          <ContentTableCasino>
-            <p>Resultado por Jogo</p>
-
-            <TableRows
-              headers={{
-                category: "Categoria",
-                tournament_name: "Nome do torneio",
-                sport_name: "Nome do esporte",
-                day: "Data",
-                aposta: "Aposta",
-                receitaBruta: "Receita Bruta",
-                pagamento: "Pagamento"
-              }}
-              data={playerFilterDate}
-              currentPage={currentPage}
-              rowsPerPage={rowsPerPage}
+              text="Total em Apostas"
+              value={dataCasinos.totalAposta}
+              Icon={<MdFileUpload size={32} color="#229ED9" />}
             />
 
-            <Pagination
-              totalCountOfRegisters={totalResults}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
+            <Summary
+              variant="green"
+              text="Receita Bruta Total"
+              value={dataCasinos.totalReceitaBruta}
+              Icon={<MdFileUpload size={32} color="#448919" />}
             />
-          </ContentTableCasino>
-        </FlexHomeCasino>
+
+            <ColumnSummaryCasino>
+              <Summary
+                variant="green"
+                text="Total em pagamentos"
+                value={dataCasinos.totalPagamento}
+              />
+
+              <Summary
+                variant="blue"
+                text="Total Jogadores"
+                value={dataCasinos.quantidadeJogadoresUnicos}
+              />
+            </ColumnSummaryCasino>
+          </ContentSummaryCasino>
+
+          <OperationFlexCasino>
+            <Top10FirstTemplateComponent data={top10PopularGames} />
+          </OperationFlexCasino>
+
+          <OperationFlexCasino>
+            <Top10SecondTemplateComponent
+              IconTitle={<MdFileUpload size={32} color="#9FE872" />}
+              title="Top 10 Mais Lucrativos"
+              data={top10ProfitableGames}
+            />
+            <Top10SecondTemplateComponent
+              IconTitle={<IoMdDownload size={32} color="#E85353" />}
+              title="Top 10 Mais Prejuízos"
+              data={top10DamageGames}
+            />
+          </OperationFlexCasino>
+
+          <FlexHomeCasino>
+            <ContentTableCasino>
+              <p>Resultado por Jogo</p>
+
+              <TableRows
+                headers={{
+                  category: "Categoria",
+                  tournament_name: "Nome do torneio",
+                  sport_name: "Nome do esporte",
+                  day: "Data",
+                  aposta: "Aposta",
+                  receitaBruta: "Receita Bruta",
+                  pagamento: "Pagamento"
+                }}
+                data={playerFilterDate}
+                currentPage={currentPage}
+                rowsPerPage={rowsPerPage}
+              />
+
+              <Pagination
+                totalCountOfRegisters={totalResults}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+              />
+            </ContentTableCasino>
+          </FlexHomeCasino>
+        </Visibility>
+
       </ContentCasino>
     </ContainerCasino>
 

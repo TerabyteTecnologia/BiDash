@@ -12,6 +12,15 @@ export const ContentHome = styled.div`
   margin: 0 auto
 `;
 
+export const DivSpinnerHome = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 200px;
+  margin-bottom: 800px;
+`;
+
 export const ContentSummary = styled.div`
   width: 100%;
   display: grid;
@@ -46,6 +55,10 @@ export const FlexHome = styled.div`
 
   width: 100%;
   height: auto;
+
+  @media (max-width: 1400px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const ContentFlexHome = styled(BackgroundHome)`

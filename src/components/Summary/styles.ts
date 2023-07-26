@@ -14,6 +14,8 @@ export const SummaryCard = styled.div<SummaryCardProps>`
   background: ${props => props.theme["gray-600"]};
   border-radius: 0.375rem;
   padding: 2rem;
+  max-width: 39.375rem;
+  flex-wrap: wrap;
 
   header {
     display: flex;
@@ -29,7 +31,10 @@ export const SummaryCard = styled.div<SummaryCardProps>`
   
   strong {
     display: block;
-    font-size: clamp(1.25rem, 2.5vw, 3.125rem); 
+    font-size: clamp(1.25rem, 2.5vw, 2.1875rem); 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   svg {
@@ -42,6 +47,10 @@ export const SummaryCard = styled.div<SummaryCardProps>`
       width: 2.1875rem;
       height: 2.1875rem;
     }
+
+    ${props => props.isIcon === true && css`
+      padding: 1.375rem;
+    `}
   }
 
   ${props => props.isIcon === false && css`

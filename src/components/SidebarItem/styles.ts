@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ContainerSideBarItem = styled.div`
   display: flex;
+  align-items: center;
   gap: 0.375rem;
 
   font-weight: bold;

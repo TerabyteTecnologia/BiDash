@@ -25,8 +25,11 @@ import {
   FlexHomeCasino,
   ContentCasino,
   OperationFlexCasino,
-  ColumnSummaryCasino
+  ColumnSummaryCasino,
+  DivSpinnerCasino
 } from "./styles";
+import { Visibility } from '../../components/Visibility';
+import { Spinner } from '../../components/Spinner';
 
 export function Casino() {
 
@@ -36,9 +39,9 @@ export function Casino() {
 
   const { dateFilter, isTest } = useFilterSearch();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
-
 
   const [dataCasinos, setDataCasinos] = useState<DataCasinoProps>({
     total_turnover: "R$ 0",
@@ -52,8 +55,6 @@ export function Casino() {
   const [top10PopularGames, setTop10PopularGames] = useState<PopularGamesProps[]>([]);
   const [top10ProfitableGames, setTop10ProfitableGames] = useState<PopularGamesProps[]>([]);
   const [top10DamageGames, setTop10DamageGames] = useState<PopularGamesProps[]>([]);
-
-
 
   useEffect(() => {
     getLoadDataSportsBooks();
@@ -69,6 +70,8 @@ export function Casino() {
 
   const getLoadDataSportsBooks = async () => {
     setPlayerFilterDate([]);
+    setLoading(true);
+    setTotalResults(0);
 
     const filter = {
       dataStart: dateFilter.from,
@@ -106,6 +109,7 @@ export function Casino() {
         });
 
         setTotalResults(result.data.recordsFilter.length);
+        setLoading(false);
       }
     });
   };
@@ -116,81 +120,90 @@ export function Casino() {
 
         <FilterSearch handleSearch={handleSearchGraphic} showPlayerTest />
 
-        <ContentSummaryCasino>
-          <Summary
-            variant="blue"
-            text="Total Turnover"
-            value={dataCasinos.total_turnover}
-            Icon={<MdFileUpload size={32} color="#229ED9" />}
-          />
+        <Visibility visible={loading}>
+          <DivSpinnerCasino>
+            <Spinner />
+          </DivSpinnerCasino>
+        </Visibility>
 
-          <Summary
-            variant="green"
-            text="Total Profit"
-            value={dataCasinos.total_profit}
-            Icon={<MdFileUpload size={32} color="#448919" />}
-          />
+        <Visibility visible={!loading}>
 
-          <ColumnSummaryCasino>
-            <Summary
-              variant="green"
-              text="Profit %"
-              value={dataCasinos.profit_percent}
-            />
-
+          <ContentSummaryCasino>
             <Summary
               variant="blue"
-              text="Total Jogadores"
-              value={dataCasinos.total_players}
-            />
-          </ColumnSummaryCasino>
-        </ContentSummaryCasino>
-
-        <OperationFlexCasino>
-          <Top10FirstTemplateComponent data={top10PopularGames} />
-        </OperationFlexCasino>
-
-        <OperationFlexCasino>
-          <Top10SecondTemplateComponent
-            IconTitle={<MdFileUpload size={32} color="#9FE872" />}
-            title="Top 10 Mais Lucrativos"
-            data={top10ProfitableGames}
-          />
-          <Top10SecondTemplateComponent
-            IconTitle={<IoMdDownload size={32} color="#E85353" />}
-            title="Top 10 Mais Prejuízos"
-            data={top10DamageGames}
-          />
-        </OperationFlexCasino>
-
-        <FlexHomeCasino>
-          <ContentTableCasino>
-            <p>Resultado por Jogo</p>
-
-            <TableRows
-              headers={{
-                name_player: "Nome do Jogo",
-                day: "Data Registro",
-                turnover: "Turnover",
-                winnings: "Winnings",
-                profit: "Profit",
-                profit_percent: "Profit %",
-                qtd_player: "Qtd. Jogadores"
-              }}
-              data={playerFilterDate}
-              currentPage={currentPage}
-              rowsPerPage={rowsPerPage}
+              text="Total Turnover"
+              value={dataCasinos.total_turnover}
+              Icon={<MdFileUpload size={32} color="#229ED9" />}
             />
 
-            <Pagination
-              totalCountOfRegisters={totalResults}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
+            <Summary
+              variant="green"
+              text="Total Profit"
+              value={dataCasinos.total_profit}
+              Icon={<MdFileUpload size={32} color="#448919" />}
             />
-          </ContentTableCasino>
-        </FlexHomeCasino>
+
+            <ColumnSummaryCasino>
+              <Summary
+                variant="green"
+                text="Profit %"
+                value={dataCasinos.profit_percent}
+              />
+
+              <Summary
+                variant="blue"
+                text="Total Jogadores"
+                value={dataCasinos.total_players}
+              />
+            </ColumnSummaryCasino>
+          </ContentSummaryCasino>
+
+          <OperationFlexCasino>
+            <Top10FirstTemplateComponent data={top10PopularGames} />
+          </OperationFlexCasino>
+
+          <OperationFlexCasino>
+            <Top10SecondTemplateComponent
+              IconTitle={<MdFileUpload size={32} color="#9FE872" />}
+              title="Top 10 Mais Lucrativos"
+              data={top10ProfitableGames}
+            />
+            <Top10SecondTemplateComponent
+              IconTitle={<IoMdDownload size={32} color="#E85353" />}
+              title="Top 10 Mais Prejuízos"
+              data={top10DamageGames}
+            />
+          </OperationFlexCasino>
+
+          <FlexHomeCasino>
+            <ContentTableCasino>
+              <p>Resultado por Jogo</p>
+
+              <TableRows
+                headers={{
+                  name_player: "Nome do Jogo",
+                  day: "Data Registro",
+                  turnover: "Turnover",
+                  winnings: "Winnings",
+                  profit: "Profit",
+                  profit_percent: "Profit %",
+                  qtd_player: "Qtd. Jogadores"
+                }}
+                data={playerFilterDate}
+                currentPage={currentPage}
+                rowsPerPage={rowsPerPage}
+              />
+
+              <Pagination
+                totalCountOfRegisters={totalResults}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+              />
+            </ContentTableCasino>
+          </FlexHomeCasino>
+        </Visibility>
       </ContentCasino>
-    </ContainerCasino>
+    </ContainerCasino >
 
   );
 }

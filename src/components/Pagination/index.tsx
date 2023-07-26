@@ -17,12 +17,12 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
 
   const {
     totalCountOfRegisters,
-    registerPerPage = 10,
+    registerPerPage = 5,
     currentPage = 1,
     onPageChange
   } = props;
 
-  const lastPage = Math.floor(totalCountOfRegisters / registerPerPage);
+  const lastPage = Math.ceil(totalCountOfRegisters / registerPerPage);
 
   const previousPages = currentPage > 1
     ? generatePagesArray(currentPage - 1 - siblingsCount, currentPage - 1)

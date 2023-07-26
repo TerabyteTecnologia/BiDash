@@ -12,6 +12,15 @@ export const ContentPayment = styled.div`
   margin: 0 auto
 `;
 
+export const DivSpinner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 200px;
+  margin-bottom: 800px;
+`;
+
 export const OperationFlexPayment = styled.div`
   display: flex;
   gap: 1.25rem;
@@ -20,8 +29,8 @@ export const OperationFlexPayment = styled.div`
 export const ContentSummaryPayment = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
   margin: 1.25rem 0;
 `;
 

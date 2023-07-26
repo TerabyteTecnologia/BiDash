@@ -13,7 +13,7 @@ export function Summary(props: SummaryProps) {
         <span>{text}</span>
         {Icon && <>{Icon}</>}
       </header>
-      <strong>{value}</strong>
+      <strong title={value.toString()}>{value}</strong>
     </SummaryCard>
   );
 }

@@ -12,6 +12,14 @@ export const ContentCasino = styled.div`
   margin: 0 auto
 `;
 
+export const DivSpinnerCasino = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 200px;
+  margin-bottom: 800px;
+`;
 
 export const OperationFlexCasino = styled.div`
   display: flex;

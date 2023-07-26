@@ -30,6 +30,14 @@ export const ContentSummaryCasino = styled.div`
   margin: 1.25rem 0;
 `;
 
+export const DivSpinnerSportsBook = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 200px;
+  margin-bottom: 800px;
+`;
 
 export const FlexHomeCasino = styled.div`
   display: flex;

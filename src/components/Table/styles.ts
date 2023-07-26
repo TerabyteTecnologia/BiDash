@@ -5,7 +5,7 @@ export const TransactionsTable = styled.table`
   border-collapse: separate;
   border-spacing: 0 0.5rem;
   td {
-    padding: 1.25rem 2rem;
+    padding: 1rem 0.625rem;
     background: ${props => props.theme["gray-400"]};
     color: ${props => props.theme["white"]};
     &:first-child {
@@ -19,7 +19,11 @@ export const TransactionsTable = styled.table`
   }
 
   th {
-    text-align: start;
-    padding: 1.875rem;
+    text-align: center;
+    padding: 1rem 0.625rem;
+  }
+
+  td {
+    text-align: center;
   }
 `;

@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { OperationComponent } from '../../components/Operation';
 import { FilterSearch } from '../../components/FilterSearch';
 import { Pagination } from "../../components/Pagination";
+import { Visibility } from '../../components/Visibility';
+import { Spinner } from '../../components/Spinner';
 import { Summary } from '../../components/Summary';
 import TableRows from '../../components/TableRow';
 
@@ -29,7 +31,8 @@ import {
   ContentTablePayment,
   FlexPayment,
   ContentPayment,
-  OperationFlexPayment
+  OperationFlexPayment,
+  DivSpinner
 } from "./styles";
 
 export function Payment() {
@@ -40,6 +43,7 @@ export function Payment() {
 
   const { dateFilter, isTest } = useFilterSearch();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
 
@@ -60,7 +64,9 @@ export function Payment() {
   };
 
   const getLoadDataPayment = async () => {
+    setTotalResults(0);
     setPlayerFilterDate([]);
+    setLoading(true);
 
     const filter = {
       dataStart: dateFilter.from,
@@ -87,14 +93,14 @@ export function Payment() {
 
         const formattedData: OperationsProps = {
           DEPOSIT: {
-            COMPLETED: formatCurrency(result.data.operations.DEPOSIT.COMPLETED as number),
-            FAILED: formatCurrency(result.data.operations.DEPOSIT.FAILED as number),
-            PROCESSING: formatCurrency(result.data.operations.DEPOSIT.PROCESSING as number),
+            COMPLETED: formatCurrency(result.data.operations.DEPOSIT?.COMPLETED as number || 0),
+            FAILED: formatCurrency(result.data.operations.DEPOSIT?.FAILED as number || 0),
+            PROCESSING: formatCurrency(result.data.operations.DEPOSIT?.PROCESSING as number || 0),
           },
           WITHDRAWAL: {
-            COMPLETED: formatCurrency(result.data.operations.WITHDRAWAL.COMPLETED as number),
-            FAILED: formatCurrency(result.data.operations.WITHDRAWAL.FAILED as number),
-            PROCESSING: formatCurrency(result.data.operations.WITHDRAWAL.PROCESSING as number),
+            COMPLETED: formatCurrency(result.data.operations.WITHDRAWAL?.COMPLETED as number || 0),
+            FAILED: formatCurrency(result.data.operations.WITHDRAWAL?.FAILED as number || 0),
+            PROCESSING: formatCurrency(result.data.operations.WITHDRAWAL?.PROCESSING as number || 0),
           },
         };
 
@@ -106,6 +112,7 @@ export function Payment() {
         });
 
         setTotalResults(result.data.paymentFilter.length);
+        setLoading(false);
       }
     });
   };
@@ -116,61 +123,71 @@ export function Payment() {
 
         <FilterSearch handleSearch={handleSearchGraphic} />
 
-        <ContentSummaryPayment>
-          <Summary
-            variant="blue"
-            text="Saldo"
-            value={dataPayments?.balance || "0"}
-            Icon={<MdAccountBalance size={32} color="#229ED9" />}
-          />
+        <Visibility visible={loading}>
+          <DivSpinner>
+            <Spinner />
+          </DivSpinner>
+        </Visibility>
 
-          <Summary
-            variant="green"
-            text="Depósito"
-            value={dataPayments?.deposit || "0"}
-            Icon={<IoMdDownload size={32} color="#448919" />}
-          />
+        <Visibility visible={!loading}>
 
-          <Summary
-            variant="red"
-            text="Saque"
-            value={dataPayments?.withdrawal || "0"}
-            Icon={<MdFileUpload size={32} color="#B20D0D" />}
-          />
-        </ContentSummaryPayment>
-
-        <OperationFlexPayment>
-          <OperationComponent title="Operações de Depósito" valueOperation={dataPayments.operations?.DEPOSIT} />
-          <OperationComponent title="Operações de Saque" valueOperation={dataPayments.operations?.WITHDRAWAL} />
-        </OperationFlexPayment>
-
-        <FlexPayment>
-          <ContentTablePayment>
-            <p>Operações</p>
-
-            <TableRows
-              headers={{
-                id: "ID",
-                day: "Data Registro",
-                type: "Tipo",
-                status: "Status",
-                total: "Total",
-                quantity: "Quantidade"
-              }}
-              data={playerFilterDate}
-              currentPage={currentPage}
-              rowsPerPage={rowsPerPage}
+          <ContentSummaryPayment>
+            <Summary
+              variant="blue"
+              text="Saldo"
+              value={dataPayments?.balance || "0"}
+              Icon={<MdAccountBalance size={32} color="#229ED9" />}
             />
 
-            <Pagination
-              totalCountOfRegisters={totalResults}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
+            <Summary
+              variant="green"
+              text="Depósito"
+              value={dataPayments?.deposit || "0"}
+              Icon={<IoMdDownload size={32} color="#448919" />}
             />
-          </ContentTablePayment>
-        </FlexPayment>
+
+            <Summary
+              variant="red"
+              text="Saque"
+              value={dataPayments?.withdrawal || "0"}
+              Icon={<MdFileUpload size={32} color="#B20D0D" />}
+            />
+          </ContentSummaryPayment>
+
+          <OperationFlexPayment>
+            <OperationComponent title="Operações de Depósito" valueOperation={dataPayments.operations?.DEPOSIT} />
+            <OperationComponent title="Operações de Saque" valueOperation={dataPayments.operations?.WITHDRAWAL} />
+          </OperationFlexPayment>
+
+          <FlexPayment>
+            <ContentTablePayment>
+              <p>Operações</p>
+
+              <TableRows
+                headers={{
+                  id: "ID",
+                  day: "Data Registro",
+                  type: "Tipo",
+                  status: "Status",
+                  total: "Total",
+                  quantity: "Quantidade"
+                }}
+                data={playerFilterDate}
+                currentPage={currentPage}
+                rowsPerPage={rowsPerPage}
+              />
+
+              <Pagination
+                totalCountOfRegisters={totalResults}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+              />
+            </ContentTablePayment>
+          </FlexPayment>
+        </Visibility>
       </ContentPayment>
-    </ContainerPayment>
+
+    </ContainerPayment >
 
   );
 }

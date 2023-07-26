@@ -10,6 +10,7 @@ import { PieChartComponent } from "../../components/Charts/PieChart";
 import { FilterSearch } from '../../components/FilterSearch';
 import { Pagination } from "../../components/Pagination";
 import { Visibility } from '../../components/Visibility';
+import { Spinner } from '../../components/Spinner';
 import { Summary } from '../../components/Summary';
 import TableRows from '../../components/TableRow';
 
@@ -36,6 +37,7 @@ import {
   ContentTable,
   FlexHome,
   ContentHome,
+  DivSpinnerHome,
 } from "./styles";
 
 export function Home() {
@@ -46,6 +48,7 @@ export function Home() {
 
   const { dateFilter, isTest } = useFilterSearch();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
 
@@ -93,6 +96,8 @@ export function Home() {
 
   const getLoadDataHome = async () => {
     setPlayerFilterDate([]);
+    setTotalResults(0);
+    setLoading(true);
 
     const filter = {
       dataStart: dateFilter.from,
@@ -152,6 +157,7 @@ export function Home() {
         });
 
         setTotalResults(result.data.playerFilter.length);
+        setLoading(false);
 
         if (calculateDateDifference(dateFilter.from, dateFilter.to) >= 2)
           setShowAreaChart(true);
@@ -166,93 +172,102 @@ export function Home() {
 
         <FilterSearch handleSearch={handleSearchGraphic} showPlayerTest />
 
-        <ContentSummary>
-          <Summary
-            variant="blue"
-            text="Total de Jogadores"
-            value={playerCountDate.totalPlayer}
-            Icon={<TiGroup size={32} color="#229ED9" />}
-          />
-
-          <Summary
-            variant="green"
-            text="Jogadores Ativos"
-            value={playerCountDate.activePlayer}
-            Icon={<BsCheckCircle size={32} color="#448919" />}
-          />
-
-          <Summary
-            variant="red"
-            text="Jogadores Inativos"
-            value={playerCountDate.disabledPlayer}
-            Icon={<AiOutlineCloseCircle size={32} color="#B20D0D" />}
-          />
-        </ContentSummary>
-
-        <Visibility visible={showAreaChart}>
-          <BackgroundHome>
-            <AreaChartComponent
-              labels={graphicDatesData.dates}
-              values={graphicDatesData.quantitiesDate}
-              title="Média de Registros"
-            />
-          </BackgroundHome>
+        <Visibility visible={loading}>
+          <DivSpinnerHome>
+            <Spinner />
+          </DivSpinnerHome>
         </Visibility>
 
-        <BackgroundHome>
-          <VerticalBarComponent
-            labels={graphicStateData.states}
-            values={graphicStateData.quantitiesState}
-            title="Quantidade por Estados"
-          />
-        </BackgroundHome>
+        <Visibility visible={!loading}>
 
-        <FlexHome>
-          <ContentFlexHome>
+          <ContentSummary>
+            <Summary
+              variant="blue"
+              text="Total de Jogadores"
+              value={playerCountDate.totalPlayer}
+              Icon={<TiGroup size={32} color="#229ED9" />}
+            />
+
+            <Summary
+              variant="green"
+              text="Jogadores Ativos"
+              value={playerCountDate.activePlayer}
+              Icon={<BsCheckCircle size={32} color="#448919" />}
+            />
+
+            <Summary
+              variant="red"
+              text="Jogadores Inativos"
+              value={playerCountDate.disabledPlayer}
+              Icon={<AiOutlineCloseCircle size={32} color="#B20D0D" />}
+            />
+          </ContentSummary>
+
+          <Visibility visible={showAreaChart}>
+            <BackgroundHome>
+              <AreaChartComponent
+                labels={graphicDatesData.dates}
+                values={graphicDatesData.quantitiesDate}
+                title="Média de Registros"
+              />
+            </BackgroundHome>
+          </Visibility>
+
+          <BackgroundHome>
             <VerticalBarComponent
-              labels={graphicAgeData.ages}
-              values={graphicAgeData.quantitiesAges}
-              title="Média por Idade"
+              labels={graphicStateData.states}
+              values={graphicStateData.quantitiesState}
+              title="Quantidade por Estados"
             />
-          </ContentFlexHome>
+          </BackgroundHome>
+
+          <FlexHome>
+            <ContentFlexHome>
+              <VerticalBarComponent
+                labels={graphicAgeData.ages}
+                values={graphicAgeData.quantitiesAges}
+                title="Média por Idade"
+              />
+            </ContentFlexHome>
 
 
-          <ContentFlexHome>
-            <PieChartComponent
-              labels={graphicGenderData.sortedGenders}
-              values={graphicGenderData.sortedQuantitiesByGender}
-              title="Quantidade de Jogadores"
-            />
-          </ContentFlexHome>
+            <ContentFlexHome>
+              <PieChartComponent
+                labels={graphicGenderData.sortedGenders}
+                values={graphicGenderData.sortedQuantitiesByGender}
+                title="Quantidade de Jogadores"
+              />
+            </ContentFlexHome>
 
-        </FlexHome>
+          </FlexHome>
 
-        <FlexHome>
-          <ContentTable>
-            <p>Informações dos usuários</p>
+          <FlexHome>
+            <ContentTable>
+              <p>Informações dos usuários</p>
 
-            <TableRows
-              headers={{
-                id: "ID",
-                name: "Nome",
-                email: "Email",
-                phone: "Telefone",
-                state: "Estado",
-                age: "Idade",
-                registration: "Data de Registro"
-              }}
-              data={playerFilterDate}
-              currentPage={currentPage}
-              rowsPerPage={rowsPerPage}
-            />
+              <TableRows
+                headers={{
+                  id: "ID",
+                  name: "Nome",
+                  email: "Email",
+                  phone: "Telefone",
+                  state: "Estado",
+                  age: "Idade",
+                  registration: "Data de Registro"
+                }}
+                data={playerFilterDate}
+                currentPage={currentPage}
+                rowsPerPage={rowsPerPage}
+              />
 
-            <Pagination
-              totalCountOfRegisters={totalResults}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-            />
-          </ContentTable>
-        </FlexHome>
+              <Pagination
+                totalCountOfRegisters={totalResults}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+              />
+            </ContentTable>
+          </FlexHome>
+        </Visibility>
       </ContentHome>
     </ContainerHome>
 

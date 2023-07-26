@@ -12,7 +12,7 @@ export const BackgroundFirstTemplate = styled.div`
   width: 100%;
 
   span, p {
-    font-size: 1.375rem;
+    font-size: clamp(1rem, 1.5vw, 1.5625rem);
     font-weight: 700;
     line-height: 2.375rem;
     letter-spacing: 0em;
@@ -69,6 +69,6 @@ export const RowTitlePlayerFirstTemplate = styled.div`
 export const TextDataEmpty = styled.div`
   margin: 0 auto;
   text-align: center;
-  font-size: 1.375rem;
+  font-size: clamp(1rem, 1.5vw, 1.375rem);
   font-weight: 700;
 `;

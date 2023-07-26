@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme["white"]};
     -webkit-font-smoothing: antialiased;
 
-    overflow-x: hidden
+    /* overflow-x: hidden */
   }
 
   a {
