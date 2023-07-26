@@ -1,5 +1,4 @@
 import {
-  FaUserCog,
   FaBalanceScale,
   FaUserCheck,
   FaChartBar
