@@ -3,14 +3,14 @@ export const InitialOperation = {
   deposit: "R$ 0",
   operations: {
     DEPOSIT: {
-      COMPLETED: "R$ 0",
-      FAILED: "R$ 0",
-      PROCESSING: "R$ 0"
+      COMPLETED: 0,
+      FAILED: 0,
+      PROCESSING: 0
     },
     WITHDRAWAL: {
-      COMPLETED: "R$ 0",
-      FAILED: "R$ 0",
-      PROCESSING: "R$ 0"
+      COMPLETED: 0,
+      FAILED: 0,
+      PROCESSING: 0
     }
   },
   withdrawal: "R$ 0"
@@ -29,9 +29,9 @@ export interface OperationsProps {
 }
 
 export interface OperationsItemsProps {
-  COMPLETED: string;
-  FAILED: string;
-  PROCESSING: string;
+  COMPLETED: number;
+  FAILED: number;
+  PROCESSING: number;
 }
 
 export interface PaymentsTableFilterProps {

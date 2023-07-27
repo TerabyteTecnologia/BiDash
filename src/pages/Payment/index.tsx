@@ -93,14 +93,14 @@ export function Payment() {
 
         const formattedData: OperationsProps = {
           DEPOSIT: {
-            COMPLETED: formatCurrency(result.data.operations.DEPOSIT?.COMPLETED as number || 0),
-            FAILED: formatCurrency(result.data.operations.DEPOSIT?.FAILED as number || 0),
-            PROCESSING: formatCurrency(result.data.operations.DEPOSIT?.PROCESSING as number || 0),
+            COMPLETED: result.data.operations.DEPOSIT?.COMPLETED,
+            FAILED: result.data.operations.DEPOSIT?.FAILED,
+            PROCESSING: result.data.operations.DEPOSIT?.PROCESSING
           },
           WITHDRAWAL: {
-            COMPLETED: formatCurrency(result.data.operations.WITHDRAWAL?.COMPLETED as number || 0),
-            FAILED: formatCurrency(result.data.operations.WITHDRAWAL?.FAILED as number || 0),
-            PROCESSING: formatCurrency(result.data.operations.WITHDRAWAL?.PROCESSING as number || 0),
+            COMPLETED: result.data.operations.WITHDRAWAL?.COMPLETED,
+            FAILED: result.data.operations.WITHDRAWAL?.FAILED,
+            PROCESSING: result.data.operations.WITHDRAWAL?.PROCESSING
           },
         };
 
