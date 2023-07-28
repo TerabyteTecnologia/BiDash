@@ -22,10 +22,10 @@ export const calculateAge = (dateOfBirth: any): number => {
 
 export const formatDate = (dateString: string) => {
   const date = new Date(dateString);
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const year = date.getFullYear().toString();
-  return `${day}/${month}/${year}`;
+  const formattedDay = date.getUTCDate().toString().padStart(2, '0');
+  const formattedMonth = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  const formattedYear = date.getUTCFullYear().toString();
+  return `${formattedDay}/${formattedMonth}/${formattedYear}`;
 };
 
 export const getMinDateInSearchFilter = () => {
