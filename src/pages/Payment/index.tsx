@@ -84,7 +84,7 @@ export function Payment() {
             date: formatDate(filter.date),
             operation_type: filter.operatin_type,
             status: filter.status,
-            total: filter.total,
+            total: formatCurrency(filter.total),
             quantity: filter.quantity,
           };
 
