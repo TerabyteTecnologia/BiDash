@@ -2,7 +2,7 @@
   "name": "projectbi",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -14,6 +14,7 @@
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
     "date-fns": "^2.30.0",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
