@@ -4,7 +4,7 @@ import {
   FaChartBar
 } from 'react-icons/fa';
 
-import { LuLayoutDashboard } from "react-icons/lu";
+// import { LuLayoutDashboard } from "react-icons/lu";
 
 import logo from '../../assets/icons/logoTeraByte.svg';
 
@@ -18,15 +18,15 @@ const Sidebar = () => {
     <SideBarContainer>
       <img src={logo} alt="Logo" />
       <SideBarContent>
-        <SidebarItem Icon={LuLayoutDashboard} Text="Dashboard" route="/" />
+        {/* <SidebarItem Icon={LuLayoutDashboard} Text="Dashboard" route="/" isActive={location.pathname === '/'} /> */}
         <p>JOGADORES</p>
-        <SidebarItem Icon={FaUserCheck} Text="Registros" route="/" />
+        <SidebarItem Icon={FaUserCheck} Text="Registros" route="/jogadores" isActive={location.pathname === '/jogadores'} />
         <p>PAGAMENTOS</p>
-        <SidebarItem Icon={FaBalanceScale} Text="Registros" route="/pagamentos" />
+        <SidebarItem Icon={FaBalanceScale} Text="Registros" route="/pagamentos" isActive={location.pathname === '/pagamentos'} />
         <p>CASSINO</p>
-        <SidebarItem Icon={FaChartBar} Text="Registros" route="/cassino" />
+        <SidebarItem Icon={FaChartBar} Text="Registros" route="/cassino" isActive={location.pathname === '/cassino'} />
         <p>LIVROS DE ESPORTES</p>
-        <SidebarItem Icon={FaChartBar} Text="Registros" route="/livros-esportes" />
+        <SidebarItem Icon={FaChartBar} Text="Registros" route="/livros-esportes" isActive={location.pathname === '/livros-esportes'} />
         {/* <p>CONFIGURAÇÕES</p>
         <SidebarItem Icon={FaUserCog} Text="Usuários" route="/" /> */}
       </SideBarContent>

@@ -1,9 +1,10 @@
 import { FaSearch } from "react-icons/fa";
 
-import { FilterSearchProps } from "./interface";
-import { ContainerFilterSearch, ToggleButton, ToggleSwitchContent } from "./styles";
 import { Visibility } from "../Visibility";
 import { useFilterSearch } from "../../contexts/FilterSearch";
+import { FilterSearchProps } from "./interface";
+
+import { ContainerFilterSearch, ToggleButton, ToggleSwitchContent } from "./styles";
 
 export function FilterSearch(props: FilterSearchProps) {
 

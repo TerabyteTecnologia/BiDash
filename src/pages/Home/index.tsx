@@ -161,7 +161,7 @@ export function Home() {
 
         if (calculateDateDifference(dateFilter.from, dateFilter.to) >= 2)
           setShowAreaChart(true);
-        else setShowAreaChart(false);
+        else setShowAreaChart(true);
       }
     });
   };

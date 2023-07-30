@@ -10,7 +10,7 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<PrivateRoutes />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/jogadores" element={<Home />} />
         <Route path="/pagamentos" element={<Payment />} />
         <Route path="/cassino" element={<Casino />} />
         <Route path="/livros-esportes" element={<SportsBooks />} />

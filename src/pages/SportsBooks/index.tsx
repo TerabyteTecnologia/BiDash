@@ -16,7 +16,7 @@ import { useFilterSearch } from '../../contexts/FilterSearch';
 import { getReportSportsBooks } from '../../services/global/endPoints';
 
 import { formatDate } from '../../utils/Date';
-import { formatCurrency } from '../../utils/Formatter';
+import { currencyStringToNumber, formatCurrency } from '../../utils/Formatter';
 
 import {
   SportsBooksTableFilterProps,
@@ -139,14 +139,22 @@ export function SportsBooks() {
               variant="blue"
               text="Total em Apostas"
               value={dataCasinos.totalAposta}
-              Icon={<MdFileUpload size={32} color="#229ED9" />}
+              Icon={
+                currencyStringToNumber(dataCasinos.totalAposta) >= 0 ?
+                  <MdFileUpload size={32} color="#229ED9" /> :
+                  <MdFileUpload size={32} color="#B20D0D" />
+              }
             />
 
             <Summary
               variant="green"
               text="Receita Bruta Total"
               value={dataCasinos.totalReceitaBruta}
-              Icon={<MdFileUpload size={32} color="#448919" />}
+              Icon={
+                currencyStringToNumber(dataCasinos.totalReceitaBruta) >= 0 ?
+                  <MdFileUpload size={32} color="#448919" /> :
+                  <MdFileUpload size={32} color="#B20D0D" />
+              }
             />
 
             <ColumnSummaryCasino>

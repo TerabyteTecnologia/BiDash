@@ -47,9 +47,9 @@ export const DateOutputStr = (dateStr?: string, patternStr?: string) => {
 export const calcDataTo = (period: any, newDate: string, setPeriod: Dispatch<SetStateAction<any>>) => {
   const intervalDates = Math.abs(differenceInDays(new Date(period.from), new Date(period.to)));
 
-  if (intervalDates > 90) {
+  if (intervalDates > 365) {
     if (newDate === 'end') {
-      const endDate = addMonths(new Date(period.from), 3);
+      const endDate = addMonths(new Date(period.from), 12);
       const compareDate = isBefore(endDate, new Date());
 
       if (compareDate) {
@@ -61,17 +61,18 @@ export const calcDataTo = (period: any, newDate: string, setPeriod: Dispatch<Set
   }
 };
 
-export const calcDataFrom = (period: any, newDate: string, setPeriod: Dispatch<SetStateAction<any>>) => {
-  const intervalDates = Math.abs(differenceInDays(new Date(period.from), new Date(period.to)));
+export const
+  calcDataFrom = (period: any, newDate: string, setPeriod: Dispatch<SetStateAction<any>>) => {
+    const intervalDates = Math.abs(differenceInDays(new Date(period.from), new Date(period.to)));
 
-  if (intervalDates > 365) {
-    if (newDate === 'start') {
-      const startDate = subMonths(new Date(period.to), 12);
+    if (intervalDates > 365) {
+      if (newDate === 'start') {
+        const startDate = subMonths(new Date(period.to), 12);
 
-      setPeriod({ ...period, from: DateOutputStr(startDate.toISOString(), 'yyyy-MM-dd') });
+        setPeriod({ ...period, from: DateOutputStr(startDate.toISOString(), 'yyyy-MM-dd') });
+      }
     }
-  }
-};
+  };
 
 export function calculateDateDifference(fromDate: string, toDate: string): number {
   const oneDay = 24 * 60 * 60 * 1000; // Milissegundos em um dia

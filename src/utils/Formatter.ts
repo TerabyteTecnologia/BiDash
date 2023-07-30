@@ -9,3 +9,11 @@ export const decimalToPercentage = (decimalNumber: number) => {
   const percentage = decimalNumber * 100;
   return `${percentage.toFixed(2)}%`;
 };
+
+export const currencyStringToNumber = (currencyString: string) => {
+
+  const numericString = currencyString.replace(/[^0-9]/g, '');
+  const numericValue = parseFloat(numericString) / 100;
+
+  return numericValue;
+};

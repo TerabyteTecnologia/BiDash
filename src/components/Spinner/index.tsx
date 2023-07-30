@@ -1,8 +1,11 @@
-import { StyledSpinner } from "./styles";
+import { ContainerSpinner, StyledSpinner } from "./styles";
 
 export function Spinner() {
 
   return (
-    <StyledSpinner />
+    <ContainerSpinner>
+      <StyledSpinner />
+      <span>Esse processo pode levar alguns minutos para ser concluído</span>
+    </ContainerSpinner>
   );
 }

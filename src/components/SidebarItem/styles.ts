@@ -11,7 +11,7 @@ export const ContainerSideBarItem = styled.div`
 
   transition: filter 0.2s;
 
-  &:hover {
+  &:hover, &.active {
     filter: brightness(0.9);
 
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);

@@ -33,7 +33,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (isAuthentication)
-      navigate("/");
+      navigate("/jogadores");
   }, [isAuthentication]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

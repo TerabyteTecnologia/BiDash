@@ -24,7 +24,7 @@ export const Top10SecondTemplateComponent = (props: Top10SecondTemplateProps) =>
 
       <BodyFistTemplate>
 
-        {data?.slice(0, 5).map((game: any) => (
+        {data?.slice(0, 10).map((game: any) => (
           <ContentSecondTemplate key={game.jogo}>
             <span>{game.jogo}</span>
             <span>  {formatCurrency(game.resultado as number)}</span>

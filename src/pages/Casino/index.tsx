@@ -15,7 +15,7 @@ import { useFilterSearch } from '../../contexts/FilterSearch';
 import { useToast } from '../../hooks/useToast';
 
 import { formatDate } from '../../utils/Date';
-import { decimalToPercentage, formatCurrency } from '../../utils/Formatter';
+import { currencyStringToNumber, decimalToPercentage, formatCurrency } from '../../utils/Formatter';
 import { CasinoTableFilterProps, DataCasinoProps, PopularGamesProps } from './interface';
 
 import {
@@ -100,7 +100,7 @@ export function Casino() {
         setTop10PopularGames(result.data.popularGames.slice(0, 10));
         setTop10ProfitableGames(result.data.resultadosPositivos.slice(0, 10));
         setTop10DamageGames(result.data.resultadosNegativos.slice(0, 10));
-
+        console.log(result.data.resultadosPositivos.slice(0, 10));
         setDataCasinos({
           total_turnover: formatCurrency(result.data.totalTurnover as number),
           total_profit: formatCurrency(result.data.profit as number),
@@ -117,7 +117,6 @@ export function Casino() {
   return (
     <ContainerCasino>
       <ContentCasino>
-
         <FilterSearch handleSearch={handleSearchGraphic} showPlayerTest />
 
         <Visibility visible={loading}>
@@ -127,20 +126,27 @@ export function Casino() {
         </Visibility>
 
         <Visibility visible={!loading}>
-
           <ContentSummaryCasino>
             <Summary
-              variant="blue"
+              variant={currencyStringToNumber(dataCasinos.total_turnover) >= 0 ? "blue" : "red"}
               text="Total Turnover"
               value={dataCasinos.total_turnover}
-              Icon={<MdFileUpload size={32} color="#229ED9" />}
+              Icon={
+                currencyStringToNumber(dataCasinos.total_turnover) >= 0 ?
+                  <MdFileUpload size={32} color="#229ED9" /> :
+                  <MdFileUpload size={32} color="#B20D0D" />
+              }
             />
 
             <Summary
               variant="green"
               text="Total Profit"
               value={dataCasinos.total_profit}
-              Icon={<MdFileUpload size={32} color="#448919" />}
+              Icon={
+                currencyStringToNumber(dataCasinos.total_profit) >= 0 ?
+                  <MdFileUpload size={32} color="#448919" /> :
+                  <MdFileUpload size={32} color="#B20D0D" />
+              }
             />
 
             <ColumnSummaryCasino>

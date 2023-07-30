@@ -45,7 +45,7 @@ export const Top10FirstTemplateComponent = (props: Top10PopularGame) => {
             <ColumnTitlePlayerFirstTemplate>
 
               {data?.slice(0, 5).map((game: any, index: number) => (
-                <RowTitlePlayerFirstTemplate>
+                <RowTitlePlayerFirstTemplate key={index}>
                   <img src={topImagesFirstPart[index]} />
                   <span>{game.jogo}</span>
                 </RowTitlePlayerFirstTemplate>
@@ -54,8 +54,8 @@ export const Top10FirstTemplateComponent = (props: Top10PopularGame) => {
             </ColumnTitlePlayerFirstTemplate>
 
             <ColumnTitlePlayerFirstTemplate>
-              {data?.slice(0, 5).map((game: any) => (
-                <span>{game.quantidade}</span>
+              {data?.slice(0, 5).map((game: any, index) => (
+                <span key={index}>{game.quantidade}</span>
               ))}
             </ColumnTitlePlayerFirstTemplate>
           </ContentFirstTemplate>
@@ -63,7 +63,7 @@ export const Top10FirstTemplateComponent = (props: Top10PopularGame) => {
           <ContentFirstTemplate>
             <ColumnTitlePlayerFirstTemplate>
               {data?.slice(5, 10).map((game: any, index: number) => (
-                <RowTitlePlayerFirstTemplate>
+                <RowTitlePlayerFirstTemplate key={index}>
                   <img src={topImagesSecondPart[index]} />
                   <span>{game.jogo}</span>
                 </RowTitlePlayerFirstTemplate>
@@ -72,8 +72,8 @@ export const Top10FirstTemplateComponent = (props: Top10PopularGame) => {
             </ColumnTitlePlayerFirstTemplate>
 
             <ColumnTitlePlayerFirstTemplate>
-              {data?.slice(5, 10).map((game) => (
-                <span>{game.quantidade}</span>
+              {data?.slice(5, 10).map((game, index) => (
+                <span key={index}>{game.quantidade}</span>
               ))}
             </ColumnTitlePlayerFirstTemplate>
           </ContentFirstTemplate>

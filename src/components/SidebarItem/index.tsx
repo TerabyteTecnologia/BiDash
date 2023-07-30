@@ -4,7 +4,7 @@ import { ContainerSideBarItem } from './styles';
 
 const SidebarItem = (props: SideBarItemProps) => {
 
-  const { Icon, Text, route } = props;
+  const { Icon, Text, route, isActive } = props;
 
   const navigate = useNavigate();
 
@@ -13,7 +13,11 @@ const SidebarItem = (props: SideBarItemProps) => {
   };
 
   return (
-    <ContainerSideBarItem role="button" onClick={handleNavigate}>
+    <ContainerSideBarItem
+      role="button"
+      onClick={handleNavigate}
+      className={isActive ? 'active' : ''}
+    >
       <Icon />
       {Text}
     </ContainerSideBarItem>

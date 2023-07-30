@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const ContainerSpinner = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+
 export const StyledSpinner = styled.span`
   width: 30px;
   height: 30px;
