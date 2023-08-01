@@ -19,7 +19,7 @@ import {
 } from './interface';
 
 import { formatDate } from '../../utils/Date';
-import { formatCurrency } from '../../utils/Formatter';
+import { currencyStringToNumber, formatCurrency } from '../../utils/Formatter';
 
 import { useToast } from '../../hooks/useToast';
 import { useFilterSearch } from '../../contexts/FilterSearch';
@@ -117,6 +117,7 @@ export function Payment() {
     });
   };
 
+
   return (
     <ContainerPayment>
       <ContentPayment>
@@ -136,14 +137,22 @@ export function Payment() {
               variant="blue"
               text="Saldo"
               value={dataPayments?.balance || "0"}
-              Icon={<MdAccountBalance size={32} color="#229ED9" />}
+              Icon={
+                currencyStringToNumber(dataPayments.balance) >= 0 ?
+                  <MdAccountBalance size={32} color="#229ED9" /> :
+                  <MdFileUpload size={32} color="#B20D0D" />
+              }
             />
 
             <Summary
               variant="green"
               text="Depósito"
               value={dataPayments?.deposit || "0"}
-              Icon={<IoMdDownload size={32} color="#448919" />}
+              Icon={
+                currencyStringToNumber(dataPayments.deposit) >= 0 ?
+                  <IoMdDownload size={32} color="#448919" /> :
+                  <MdFileUpload size={32} color="#B20D0D" />
+              }
             />
 
             <Summary

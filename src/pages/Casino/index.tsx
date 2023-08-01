@@ -100,7 +100,7 @@ export function Casino() {
         setTop10PopularGames(result.data.popularGames.slice(0, 10));
         setTop10ProfitableGames(result.data.resultadosPositivos.slice(0, 10));
         setTop10DamageGames(result.data.resultadosNegativos.slice(0, 10));
-        console.log(result.data.resultadosPositivos.slice(0, 10));
+
         setDataCasinos({
           total_turnover: formatCurrency(result.data.totalTurnover as number),
           total_profit: formatCurrency(result.data.profit as number),

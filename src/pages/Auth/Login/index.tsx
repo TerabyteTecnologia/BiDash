@@ -94,7 +94,7 @@ export const Login = () => {
             type="submit"
             disabled={isLoading}
           >
-            {isLoading ? <Spinner /> : "Acessar"}
+            {isLoading ? <Spinner isLogin /> : "Acessar"}
           </ButtonDefault>
         </LoginForm>
 

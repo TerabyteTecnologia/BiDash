@@ -6,8 +6,10 @@ export const formatCurrency = (value: number) => {
 };
 
 export const decimalToPercentage = (decimalNumber: number) => {
-  const percentage = decimalNumber * 100;
-  return `${percentage.toFixed(2)}%`;
+  const percentage = decimalNumber / 100;
+  const formattedPercentage = percentage * 100;
+
+  return `${formattedPercentage.toFixed(2)}%`;
 };
 
 export const currencyStringToNumber = (currencyString: string) => {
