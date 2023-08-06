@@ -89,15 +89,3 @@ export function calculateDateDifference(fromDate: string, toDate: string): numbe
   const diffInDays = Math.round(Math.abs((startDate - endDate) / oneDay));
   return diffInDays;
 }
-
-export const isValidDate = (dateString: any) => {
-  console.log(dateString);
-  const pattern = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-  if (!pattern.test(dateString)) return false;
-  const date = new Date(dateString);
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return true;
-  // return day > 0 && day <= 31 && month > 0 && month <= 12 && year >= 1000 && year <= 9999;
-};

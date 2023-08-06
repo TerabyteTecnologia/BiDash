@@ -4,6 +4,7 @@ import {
   FaChartBar
 } from 'react-icons/fa';
 
+import { RiFileUserFill } from "react-icons/ri";
 // import { LuLayoutDashboard } from "react-icons/lu";
 
 import logo from '../../assets/icons/logoTeraByte.svg';
@@ -21,6 +22,7 @@ const Sidebar = () => {
         {/* <SidebarItem Icon={LuLayoutDashboard} Text="Dashboard" route="/" isActive={location.pathname === '/'} /> */}
         <p>JOGADORES</p>
         <SidebarItem Icon={FaUserCheck} Text="Registros" route="/jogadores" isActive={location.pathname === '/jogadores'} />
+        <SidebarItem Icon={RiFileUserFill} Text="Histórico" route="/historico-jogador" isActive={location.pathname === '/historico-jogador'} />
         <p>PAGAMENTOS</p>
         <SidebarItem Icon={FaBalanceScale} Text="Registros" route="/pagamentos" isActive={location.pathname === '/pagamentos'} />
         <p>CASSINO</p>

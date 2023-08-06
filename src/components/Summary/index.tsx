@@ -3,12 +3,12 @@ import { SummaryCard } from "./styles";
 
 export function Summary(props: SummaryProps) {
 
-  const { variant, text, value, Icon } = props;
+  const { variant = "blue", text, value, Icon, isCenter } = props;
 
   const haveIcon = Boolean(Icon);
 
   return (
-    <SummaryCard variant={variant} isIcon={haveIcon}>
+    <SummaryCard variant={variant} isIcon={haveIcon} isCenter={isCenter}>
       <header>
         <span>{text}</span>
         {Icon && <>{Icon}</>}

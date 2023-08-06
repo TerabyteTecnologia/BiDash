@@ -13,8 +13,7 @@ export const decimalToPercentage = (decimalNumber: number) => {
 };
 
 export const currencyStringToNumber = (currencyString: string) => {
-
-  const numericString = currencyString.replace(/[^0-9]/g, '');
+  const numericString = currencyString.replace(/[^0-9-]/g, '');
   const numericValue = parseFloat(numericString) / 100;
 
   return numericValue;

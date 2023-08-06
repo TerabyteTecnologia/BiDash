@@ -29,6 +29,9 @@ export const getReportSportsBooks = (data: any) => {
   }));
 };
 
+export const getHistoricPlayer = (idPlayer: string) => {
+  return Promise.resolve(api.get(`/relatorio/relatorioplayerdata?id=${idPlayer}`));
+};
 
 export const saveTokenLocalStorage = (token: string) => {
   localStorage.setItem('@app-hack:token-1.0.0', token);

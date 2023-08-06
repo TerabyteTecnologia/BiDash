@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 
 interface SummaryCardProps {
-  variant?: "green" | "blue" | "red";
+  variant: "green" | "blue" | "red";
   isIcon?: boolean;
+  isCenter?: boolean;
 }
 
 export const SummaryCard = styled.div<SummaryCardProps>`
@@ -52,6 +53,12 @@ export const SummaryCard = styled.div<SummaryCardProps>`
       padding: 1.375rem;
     `}
   }
+
+  ${props => props.isCenter === true && css`
+    strong {
+      margin: 0 auto;
+    }
+  `}
 
   ${props => props.isIcon === false && css`
       display: flex;

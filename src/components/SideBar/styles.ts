@@ -34,7 +34,11 @@ export const SideBarContainer = styled.div`
 `;
 
 export const SideBarContent = styled.div`
-  margin-top: 3.125rem;
+  gap: 0.625rem;
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 1.875rem;
   
   p {
     color: ${props => props.theme["gray-300"]};

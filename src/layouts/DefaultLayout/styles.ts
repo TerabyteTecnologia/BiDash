@@ -22,6 +22,7 @@ export const DefaultLayoutSidebar = styled.div`
 export const DefaultLayoutOutlet = styled.div`
 	grid-area: content;
 	background: ${props => props.theme["gray-400"]};
+	min-height: 100vh;
 `;
 
 export const DefaultLayoutFooter = styled.div`
