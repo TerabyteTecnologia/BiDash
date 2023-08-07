@@ -18,7 +18,7 @@ import {
 
 import { getHistoricPlayer } from '../../../services/global/endPoints';
 
-import { currencyStringToNumber, formatCurrency } from '../../../utils/Formatter';
+import { currencyStringToNumber, decimalToPercentage, formatCurrency } from '../../../utils/Formatter';
 import { formatDate } from '../../../utils/Date';
 
 import {
@@ -76,6 +76,7 @@ export function HistoricPlayer() {
     getHistoricPlayer(idSearchPlayer).then(result => {
 
       if (result.data) {
+        console.log(result.data);
         setPlayerFilterHistoric({
           name: result.data.playerFilter.name,
           btag: result.data.playerFilter.btag,
@@ -107,13 +108,16 @@ export function HistoricPlayer() {
             setSportBookPlayersFilter((prevData) => [...prevData, playerObj]);
           });
         }
-        if (result.data.playerFilter.daycasinoplayer.length > 0) {
-          result.data.playerFilter.daycasinoplayer.map((filter: any) => {
+        if (result.data.groupedByDayAndResultGame.length > 0) {
+          result.data.groupedByDayAndResultGame.map((filter: any) => {
 
             const playerObj: CasinoPlayersFilterProps = {
-              date: formatDate(filter.date),
-              turnover: formatCurrency(filter.turnover),
-              winnings: formatCurrency(filter.winnings)
+              name: filter.resultgame.name,
+              day: formatDate(filter.day),
+              turnover: formatCurrency(filter.totalTurnover),
+              winnings: formatCurrency(filter.totalWinnings),
+              profit: formatCurrency(filter.profit),
+              profitPercent: decimalToPercentage(filter.profitPercent)
             };
 
             setCasinoPlayerFilter((prevData) => [...prevData, playerObj]);

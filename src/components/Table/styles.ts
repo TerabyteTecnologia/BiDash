@@ -19,11 +19,11 @@ export const TransactionsTable = styled.table`
   }
 
   th {
-    text-align: center;
+    text-align: left;
     padding: 1rem 0.625rem;
   }
 
   td {
-    text-align: center;
+    text-align: left;
   }
 `;

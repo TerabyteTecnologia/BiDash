@@ -156,7 +156,7 @@ export const ContentTableHistoricPlayer = styled.div`
   overflow-x: auto;
   
   p {
-    font-size: clamp(1rem, 1.5vw, 1.875rem); 
+    font-size: clamp(1rem, 1.5vw, 1.875rem);
     padding: 1.25rem 0;
     text-align: center;
 

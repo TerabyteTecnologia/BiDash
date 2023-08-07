@@ -14,17 +14,20 @@ export interface ValueFilterHistoricProps {
 }
 
 export interface SportBookPlayersFilterProps {
-  category: string,
-  tournament_name: string,
-  sport_name: string,
-  date: string,
-  turnover: string,
-  gross_revenue: string,
+  category: string;
+  tournament_name: string;
+  sport_name: string;
+  date: string;
+  turnover: string;
+  gross_revenue: string;
   payout: string;
 }
 
 export interface CasinoPlayersFilterProps {
-  date: string,
-  turnover: string,
+  name: string;
+  day: string;
+  turnover: string;
   winnings: string;
+  profit: string;
+  profitPercent: string;
 }

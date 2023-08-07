@@ -22,9 +22,12 @@ export function TableCasinoHistoricPlayer(props: TableCasinoHistoricPlayerProps)
     <>
       <TableRows
         headers={{
+          name: "Nome do Jogo",
           date: "Data de Registro",
           turnover: "Turnover",
-          winnings: "Winnings"
+          winnings: "Winnings",
+          Profit: "Profit",
+          profitPercent: "Profit %"
         }}
         data={data}
         currentPage={currentPage}
