@@ -6,6 +6,8 @@ import { FilterSearch } from '../../components/FilterSearch';
 import { Pagination } from "../../components/Pagination";
 import { Summary } from '../../components/Summary';
 import TableRows from '../../components/TableRow';
+import { Visibility } from '../../components/Visibility';
+import { Spinner } from '../../components/Spinner';
 
 import { MdFileUpload } from "react-icons/md";
 import { IoMdDownload } from "react-icons/io";
@@ -16,6 +18,7 @@ import { useFilterSearch } from '../../contexts/FilterSearch';
 import { getReportSportsBooks } from '../../services/global/endPoints';
 
 import { formatDate } from '../../utils/Date';
+import { validVariant } from '../../utils/Validation';
 import { currencyStringToNumber, formatCurrency } from '../../utils/Formatter';
 
 import {
@@ -34,8 +37,7 @@ import {
   FlexHomeCasino,
   OperationFlexCasino
 } from './styles';
-import { Visibility } from '../../components/Visibility';
-import { Spinner } from '../../components/Spinner';
+
 
 export function SportsBooks() {
 
