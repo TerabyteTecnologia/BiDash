@@ -89,14 +89,14 @@ export const ContentSummaryHistoricPlayer = styled.div`
 `;
 
 interface InputPlayerHistoricProps {
-  width: number;
+  width: number | string;
 }
 
 export const InputPlayerHistoric = styled.div<InputPlayerHistoricProps>`
   display: flex;
   align-items: center;
 
-  width: ${props => props.width}px;
+  width: ${props => props.width === "auto" ? props.width : props.width + "px"};
   height: 2.5rem;
   padding: 0 0.625rem;
   flex-shrink: 0;

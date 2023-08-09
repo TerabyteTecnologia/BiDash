@@ -26,7 +26,7 @@ export function FilterSearch(props: FilterSearchProps) {
 
       <Visibility visible={showPlayerTest}>
         <ToggleSwitchContent>
-          <ToggleButton isChecked={isTest}>
+          <ToggleButton test={`${isTest}`}>
             <input type="checkbox" defaultChecked={isTest} onChange={handleToggleIsTest} />
             <span />
           </ToggleButton>

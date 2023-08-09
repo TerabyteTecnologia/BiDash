@@ -2,8 +2,8 @@ import styled, { css } from "styled-components";
 
 interface SummaryCardProps {
   variant: "green" | "blue" | "red";
-  isIcon?: boolean;
-  isCenter?: boolean;
+  icon: "true" | "false";
+  center: "true" | "false";
 }
 
 export const SummaryCard = styled.div<SummaryCardProps>`
@@ -49,18 +49,18 @@ export const SummaryCard = styled.div<SummaryCardProps>`
       height: 2.1875rem;
     }
 
-    ${props => props.isIcon === true && css`
+    ${props => props.icon === "true" && css`
       padding: 1.375rem;
     `}
   }
 
-  ${props => props.isCenter === true && css`
+  ${props => props.center === "true" && css`
     strong {
       margin: 0 auto;
     }
   `}
 
-  ${props => props.isIcon === false && css`
+  ${props => props.icon === "false" && css`
       display: flex;
       flex-direction: row;
       justify-content: space-between;

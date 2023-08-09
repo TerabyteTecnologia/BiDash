@@ -34,6 +34,7 @@ import {
   OperationFlexPayment,
   DivSpinner
 } from "./styles";
+import { validVariant } from '../../utils/Validation';
 
 export function Payment() {
 
@@ -145,7 +146,7 @@ export function Payment() {
             />
 
             <Summary
-              variant="green"
+              variant={validVariant((dataPayments.deposit))}
               text="Depósito"
               value={dataPayments?.deposit || "0"}
               Icon={

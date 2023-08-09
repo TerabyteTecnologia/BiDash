@@ -18,8 +18,9 @@ import {
 
 import { getHistoricPlayer } from '../../../services/global/endPoints';
 
-import { currencyStringToNumber, decimalToPercentage, formatCurrency } from '../../../utils/Formatter';
+import { decimalToPercentage, formatCurrency } from '../../../utils/Formatter';
 import { formatDate } from '../../../utils/Date';
+import { validVariant } from '../../../utils/Validation';
 
 import {
   ContainerHistoricSearch,
@@ -54,7 +55,7 @@ export function HistoricPlayer() {
     deposit: "R$ 0",
     whtidrawal: "R$ 0",
     totalCasino: "R$ 0",
-    profit: "R$ 0"
+    totalAposta: "R$ 0"
   });
 
   const [sportBookPlayersFilter, setSportBookPlayersFilter] = useState<SportBookPlayersFilterProps[]>([]);
@@ -76,20 +77,19 @@ export function HistoricPlayer() {
     getHistoricPlayer(idSearchPlayer).then(result => {
 
       if (result.data) {
-        console.log(result.data);
         setPlayerFilterHistoric({
           name: result.data.playerFilter.name,
           btag: result.data.playerFilter.btag,
           is_test_client: result.data.playerFilter.is_test_client === 0 ? "Não" : "Sim",
-          profit: formatCurrency(result.data.playerFilter.profit),
-          registration_date: formatDate(result.data.playerFilter.registration_date),
+          profit: formatCurrency(result.data.profit),
+          registration_date: formatDate(result.data.playerFilter.registration_date)
         });
 
         setValueFilterHistoric({
           deposit: formatCurrency(result.data.deposit),
           whtidrawal: formatCurrency(result.data.whtidrawal),
           totalCasino: formatCurrency(result.data.totalCasino),
-          profit: formatCurrency(result.data.profit)
+          totalAposta: formatCurrency(result.data.totalAposta)
         });
 
         if (result.data.playerFilter.sportbooktplayers.length > 0) {
@@ -133,13 +133,6 @@ export function HistoricPlayer() {
     setIdSearchPlayer(e.target.value);
   };
 
-  const validVariant = (value: string) => {
-    if (currencyStringToNumber(value) >= 0)
-      return "green";
-
-    return "red";
-  };
-
   return (
     <ContainerHistoricSearch>
       <ContentHistoricSearch>
@@ -151,7 +144,6 @@ export function HistoricPlayer() {
             <Spinner />
           </DivSpinnerHistoricSearch>
         </Visibility>
-
 
         <DivSearchTitleHistoric>
           <InputPlayerHistoricSearch
@@ -196,7 +188,7 @@ export function HistoricPlayer() {
             <InformationPlayerTitleHistoric>
               <div>
                 <p>Btag</p>
-                <InputPlayerHistoric width={210}>
+                <InputPlayerHistoric width={"auto"}>
                   <span> {playerFilterHistoric.btag} </span>
                 </InputPlayerHistoric>
               </div>
@@ -243,9 +235,9 @@ export function HistoricPlayer() {
             <div>
               <p>Livros de esportes</p>
               <Summary
-                variant={validVariant((valueFilterHistoric.profit))}
+                variant={validVariant((valueFilterHistoric.totalAposta))}
                 text=""
-                value={valueFilterHistoric.profit}
+                value={valueFilterHistoric.totalAposta}
                 isCenter
               />
             </div>

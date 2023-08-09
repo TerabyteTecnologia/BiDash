@@ -10,7 +10,7 @@ export interface ValueFilterHistoricProps {
   deposit: string;
   whtidrawal: string;
   totalCasino: string;
-  profit: string;
+  totalAposta: string;
 }
 
 export interface SportBookPlayersFilterProps {

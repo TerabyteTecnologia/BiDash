@@ -159,7 +159,7 @@ export function SportsBooks() {
 
             <ColumnSummaryCasino>
               <Summary
-                variant="green"
+                variant={validVariant((dataCasinos.totalPagamento))}
                 text="Total em pagamentos"
                 value={dataCasinos.totalPagamento}
               />

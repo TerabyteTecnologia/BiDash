@@ -6,6 +6,8 @@ import { FilterSearch } from '../../components/FilterSearch';
 import { Pagination } from "../../components/Pagination";
 import { Summary } from '../../components/Summary';
 import TableRows from '../../components/TableRow';
+import { Visibility } from '../../components/Visibility';
+import { Spinner } from '../../components/Spinner';
 
 import { MdFileUpload } from "react-icons/md";
 import { IoMdDownload } from "react-icons/io";
@@ -14,6 +16,7 @@ import { getReportCasino } from '../../services/global/endPoints';
 import { useFilterSearch } from '../../contexts/FilterSearch';
 import { useToast } from '../../hooks/useToast';
 
+import { validVariant } from '../../utils/Validation';
 import { formatDate } from '../../utils/Date';
 import { currencyStringToNumber, decimalToPercentage, formatCurrency } from '../../utils/Formatter';
 import { CasinoTableFilterProps, DataCasinoProps, PopularGamesProps } from './interface';
@@ -28,8 +31,6 @@ import {
   ColumnSummaryCasino,
   DivSpinnerCasino
 } from "./styles";
-import { Visibility } from '../../components/Visibility';
-import { Spinner } from '../../components/Spinner';
 
 export function Casino() {
 
@@ -134,24 +135,24 @@ export function Casino() {
               Icon={
                 currencyStringToNumber(dataCasinos.total_turnover) >= 0 ?
                   <MdFileUpload size={32} color="#229ED9" /> :
-                  <MdFileUpload size={32} color="#B20D0D" />
+                  <IoMdDownload size={32} color="#B20D0D" />
               }
             />
 
             <Summary
-              variant="green"
+              variant={validVariant((dataCasinos.total_profit))}
               text="Total Profit"
               value={dataCasinos.total_profit}
               Icon={
                 currencyStringToNumber(dataCasinos.total_profit) >= 0 ?
                   <MdFileUpload size={32} color="#448919" /> :
-                  <MdFileUpload size={32} color="#B20D0D" />
+                  <IoMdDownload size={32} color="#B20D0D" />
               }
             />
 
             <ColumnSummaryCasino>
               <Summary
-                variant="green"
+                variant={currencyStringToNumber(dataCasinos.profit_percent) >= 0 ? "blue" : "red"}
                 text="Profit %"
                 value={dataCasinos.profit_percent}
               />

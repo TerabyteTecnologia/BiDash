@@ -34,7 +34,7 @@ export const ToggleSwitchContent = styled.div`
 `;
 
 interface ToggleButtonProps {
-  isChecked: boolean;
+  test: "true" | "false";
 }
 
 export const ToggleButton = styled.label<ToggleButtonProps>`
@@ -61,7 +61,7 @@ export const ToggleButton = styled.label<ToggleButtonProps>`
     transition: transform 0.2s;
   }
 
-  ${props => props.isChecked === true && css`
+  ${props => props.test === "true" && css`
     background-color: red;
 
     span {

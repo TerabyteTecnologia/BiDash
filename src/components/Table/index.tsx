@@ -38,30 +38,36 @@ interface TableProps<T extends MinTableItem> {
 export default function Table<T extends MinTableItem>(props: TableProps<T>) {
   function renderRow(item: T) {
     return (
-      <tr>
-        {objectKeys(item).map((itemProperty) => {
+      <>
+        {objectKeys(item).map((itemProperty, index) => {
           const customRenderer = props.customRenderers?.[itemProperty];
 
           if (customRenderer) {
-            return <td>{customRenderer(item)}</td>;
+            return <td key={index}>{customRenderer(item)}</td>;
           }
 
           return (
-            <td>{isPrimitive(item[itemProperty]) ? String(item[itemProperty]) : ""}</td>
+            <td key={index}>{isPrimitive(item[itemProperty]) ? String(item[itemProperty]) : ""}</td>
           );
         })}
-      </tr>
+      </>
     );
   }
 
   return (
     <TransactionsTable>
       <thead>
-        {objectValues(props.headers).map((headerValue) => (
-          <th>{headerValue}</th>
-        ))}
+        <tr>
+          {objectValues(props.headers).map((headerValue) => (
+            <th key={headerValue}>{headerValue}</th>
+          ))}
+        </tr>
       </thead>
-      <tbody>{props.items.map(renderRow)}</tbody>
+      <tbody>
+        {props.items.map((item, index) => (
+          <tr key={index}>{renderRow(item)}</tr>
+        ))}
+      </tbody>
     </TransactionsTable>
   );
 }
