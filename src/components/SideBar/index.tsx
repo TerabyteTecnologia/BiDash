@@ -5,7 +5,7 @@ import {
 } from 'react-icons/fa';
 
 import { RiFileUserFill } from "react-icons/ri";
-// import { LuLayoutDashboard } from "react-icons/lu";
+import { LuLayoutDashboard } from "react-icons/lu";
 
 import logo from '../../assets/icons/logoTeraByte.svg';
 
@@ -19,7 +19,7 @@ const Sidebar = () => {
     <SideBarContainer>
       <img src={logo} alt="Logo" />
       <SideBarContent>
-        {/* <SidebarItem Icon={LuLayoutDashboard} Text="Dashboard" route="/" isActive={location.pathname === '/'} /> */}
+        <SidebarItem Icon={LuLayoutDashboard} Text="Dashboard" route="/" isActive={location.pathname === '/'} />
         <p>JOGADORES</p>
         <SidebarItem Icon={FaUserCheck} Text="Registros" route="/jogadores" isActive={location.pathname === '/jogadores'} />
         <SidebarItem Icon={RiFileUserFill} Text="Histórico" route="/historico-jogador" isActive={location.pathname === '/historico-jogador'} />

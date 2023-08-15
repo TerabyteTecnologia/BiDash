@@ -8,12 +8,14 @@ import { GlobalStyle } from './styles/global';
 import { themeDefault } from "./styles/themes/default";
 import { AuthContextProvider } from './contexts/Auth';
 import { FilterSearchContextProvider } from './contexts/FilterSearch';
+import { PlayersContextProvider } from './contexts/Players';
 
 function App() {
 
   return (
     <ThemeProvider theme={themeDefault}>
       <AuthContextProvider>
+
         <FilterSearchContextProvider>
           <BrowserRouter>
             <Router />

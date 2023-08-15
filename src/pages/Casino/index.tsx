@@ -14,12 +14,17 @@ import { IoMdDownload } from "react-icons/io";
 
 import { getReportCasino } from '../../services/global/endPoints';
 import { useFilterSearch } from '../../contexts/FilterSearch';
+import { CasinoContextProvider, useCasino } from '../../contexts/Casino';
 import { useToast } from '../../hooks/useToast';
 
 import { validVariant } from '../../utils/Validation';
 import { formatDate } from '../../utils/Date';
-import { currencyStringToNumber, decimalToPercentage, formatCurrency } from '../../utils/Formatter';
-import { CasinoTableFilterProps, DataCasinoProps, PopularGamesProps } from './interface';
+import {
+  currencyStringToNumber,
+  decimalToPercentage,
+  formatCurrency
+} from '../../utils/Formatter';
+import { CasinoTableFilterProps } from './interface';
 
 import {
   ContainerCasino,
@@ -32,33 +37,31 @@ import {
   DivSpinnerCasino
 } from "./styles";
 
-export function Casino() {
+export function CasinoMain() {
 
   const rowsPerPage = 5;
 
   const { toast } = useToast();
 
   const { dateFilter, isTest } = useFilterSearch();
+  const { dataCasinos,
+    setDataCasinos,
+    setTop10DamageGames,
+    setTop10PopularGames,
+    setTop10ProfitableGames,
+    top10DamageGames,
+    top10PopularGames,
+    top10ProfitableGames
+  } = useCasino();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
 
-  const [dataCasinos, setDataCasinos] = useState<DataCasinoProps>({
-    total_turnover: "R$ 0",
-    total_profit: "R$ 0",
-    profit_percent: "% 0",
-    total_players: 0
-  });
-
   const [playerFilterDate, setPlayerFilterDate] = useState<CasinoTableFilterProps[]>([]);
 
-  const [top10PopularGames, setTop10PopularGames] = useState<PopularGamesProps[]>([]);
-  const [top10ProfitableGames, setTop10ProfitableGames] = useState<PopularGamesProps[]>([]);
-  const [top10DamageGames, setTop10DamageGames] = useState<PopularGamesProps[]>([]);
-
   useEffect(() => {
-    getLoadDataSportsBooks();
+    getLoadDataCasino();
   }, []);
 
   const handleSearchGraphic = () => {
@@ -66,10 +69,10 @@ export function Casino() {
       toast.error("Data é obrigatório");
     }
 
-    getLoadDataSportsBooks();
+    getLoadDataCasino();
   };
 
-  const getLoadDataSportsBooks = async () => {
+  const getLoadDataCasino = async () => {
     setPlayerFilterDate([]);
     setLoading(true);
     setTotalResults(0);
@@ -212,5 +215,13 @@ export function Casino() {
       </ContentCasino>
     </ContainerCasino >
 
+  );
+}
+
+export function Casino() {
+  return (
+    <CasinoContextProvider>
+      <CasinoMain />
+    </CasinoContextProvider>
   );
 }

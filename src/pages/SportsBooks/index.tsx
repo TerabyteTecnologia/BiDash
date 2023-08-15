@@ -12,38 +12,44 @@ import { Spinner } from '../../components/Spinner';
 import { MdFileUpload } from "react-icons/md";
 import { IoMdDownload } from "react-icons/io";
 
-
 import { useToast } from '../../hooks/useToast';
 import { useFilterSearch } from '../../contexts/FilterSearch';
+import { SportsBooksContextProvider, useSportsBooks } from '../../contexts/SportsBooks';
 import { getReportSportsBooks } from '../../services/global/endPoints';
 
 import { formatDate } from '../../utils/Date';
 import { validVariant } from '../../utils/Validation';
 import { currencyStringToNumber, formatCurrency } from '../../utils/Formatter';
 
-import {
-  SportsBooksTableFilterProps,
-  DataSportsBookProps,
-  PopularGamesProps
-} from './interface';
+import { PopularGamesProps, SportsBooksTableFilterProps } from './interface';
 
 import {
-  ColumnSummaryCasino,
-  ContainerCasino,
-  ContentCasino,
-  ContentSummaryCasino,
-  ContentTableCasino,
+  ColumnSummarySportBook,
+  ContainerSportBook,
+  ContentSportBook,
+  ContentSummarySportBook,
+  ContentTableSportBook,
   DivSpinnerSportsBook,
-  FlexHomeCasino,
-  OperationFlexCasino
+  FlexHomeSportBook,
+  OperationFlexSportBook
 } from './styles';
 
-
-export function SportsBooks() {
+export function SportsBooksMain() {
 
   const rowsPerPage = 5;
 
   const { toast } = useToast();
+
+  const {
+    dataSportsBooks,
+    setDataSportsBooks,
+    setTop10DamageGamesSportBook,
+    setTop10PopularGamesSportBook,
+    setTop10ProfitableGamesSportBook,
+    top10DamageGamesSportBook,
+    top10PopularGamesSportBook,
+    top10ProfitableGamesSportBook
+  } = useSportsBooks();
 
   const { dateFilter, isTest } = useFilterSearch();
 
@@ -53,19 +59,9 @@ export function SportsBooks() {
 
   const [playerFilterDate, setPlayerFilterDate] = useState<SportsBooksTableFilterProps[]>([]);
 
-  const [top10PopularGames, setTop10PopularGames] = useState<PopularGamesProps[]>([]);
-  const [top10ProfitableGames, setTop10ProfitableGames] = useState<PopularGamesProps[]>([]);
-  const [top10DamageGames, setTop10DamageGames] = useState<PopularGamesProps[]>([]);
-
-  const [dataCasinos, setDataCasinos] = useState<DataSportsBookProps>({
-    totalAposta: "R$ 0",
-    totalReceitaBruta: "R$ 0",
-    totalPagamento: "R$ 0",
-    quantidadeJogadoresUnicos: "0"
-  });
-
+  console.log("dataSportsBooks", dataSportsBooks);
   useEffect(() => {
-    getLoadDataSportsBook();
+    // getLoadDataSportsBook();
   }, []);
 
   const handleSearchGraphic = () => {
@@ -104,12 +100,12 @@ export function SportsBooks() {
 
           setPlayerFilterDate((prevData) => [...prevData, paymentObj]);
         });
+        console.log(result.data);
+        setTop10PopularGamesSportBook(result.data.jogosContagemOrdenado.slice(0, 10));
+        setTop10ProfitableGamesSportBook(result.data.resultadosPositivos.slice(0, 10));
+        setTop10DamageGamesSportBook(result.data.resultadosNegativos.slice(0, 10));
 
-        setTop10PopularGames(result.data.jogosContagemOrdenado.slice(0, 10));
-        setTop10ProfitableGames(result.data.resultadosPositivos.slice(0, 10));
-        setTop10DamageGames(result.data.resultadosNegativos.slice(0, 10));
-
-        setDataCasinos({
+        setDataSportsBooks({
           totalAposta: formatCurrency(result.data.totalAposta as number),
           totalReceitaBruta: formatCurrency(result.data.totalReceitaBruta as number),
           totalPagamento: formatCurrency(result.data.totalPagamento as number),
@@ -123,8 +119,8 @@ export function SportsBooks() {
   };
 
   return (
-    <ContainerCasino>
-      <ContentCasino>
+    <ContainerSportBook>
+      <ContentSportBook>
 
         <FilterSearch handleSearch={handleSearchGraphic} showPlayerTest />
 
@@ -135,14 +131,13 @@ export function SportsBooks() {
         </Visibility>
 
         <Visibility visible={!loading}>
-
-          <ContentSummaryCasino>
+          <ContentSummarySportBook>
             <Summary
               variant="blue"
               text="Total em Apostas"
-              value={dataCasinos.totalAposta}
+              value={dataSportsBooks.totalAposta}
               Icon={
-                currencyStringToNumber(dataCasinos.totalAposta) >= 0 ?
+                currencyStringToNumber(dataSportsBooks?.totalAposta) >= 0 ?
                   <MdFileUpload size={32} color="#229ED9" /> :
                   <MdFileUpload size={32} color="#B20D0D" />
               }
@@ -151,48 +146,48 @@ export function SportsBooks() {
             <Summary
               variant="green"
               text="Receita Bruta Total"
-              value={dataCasinos.totalReceitaBruta}
+              value={dataSportsBooks.totalReceitaBruta}
               Icon={
-                currencyStringToNumber(dataCasinos.totalReceitaBruta) >= 0 ?
+                currencyStringToNumber(dataSportsBooks.totalReceitaBruta) >= 0 ?
                   <MdFileUpload size={32} color="#448919" /> :
                   <MdFileUpload size={32} color="#B20D0D" />
               }
             />
 
-            <ColumnSummaryCasino>
+            <ColumnSummarySportBook>
               <Summary
-                variant={validVariant((dataCasinos.totalPagamento))}
+                variant={validVariant((dataSportsBooks.totalPagamento))}
                 text="Total em pagamentos"
-                value={dataCasinos.totalPagamento}
+                value={dataSportsBooks.totalPagamento}
               />
 
               <Summary
                 variant="blue"
                 text="Total Jogadores"
-                value={dataCasinos.quantidadeJogadoresUnicos}
+                value={dataSportsBooks.quantidadeJogadoresUnicos}
               />
-            </ColumnSummaryCasino>
-          </ContentSummaryCasino>
+            </ColumnSummarySportBook>
+          </ContentSummarySportBook>
 
-          <OperationFlexCasino>
-            <Top10FirstTemplateComponent data={top10PopularGames} />
-          </OperationFlexCasino>
+          <OperationFlexSportBook>
+            <Top10FirstTemplateComponent data={top10PopularGamesSportBook} />
+          </OperationFlexSportBook>
 
-          <OperationFlexCasino>
+          <OperationFlexSportBook>
             <Top10SecondTemplateComponent
               IconTitle={<MdFileUpload size={32} color="#9FE872" />}
               title="Top 10 Mais Lucrativos"
-              data={top10ProfitableGames}
+              data={top10ProfitableGamesSportBook}
             />
             <Top10SecondTemplateComponent
               IconTitle={<IoMdDownload size={32} color="#E85353" />}
               title="Top 10 Mais Prejuízos"
-              data={top10DamageGames}
+              data={top10DamageGamesSportBook}
             />
-          </OperationFlexCasino>
+          </OperationFlexSportBook>
 
-          <FlexHomeCasino>
-            <ContentTableCasino>
+          <FlexHomeSportBook>
+            <ContentTableSportBook>
               <p>Resultado por Jogo</p>
 
               <TableRows
@@ -215,12 +210,20 @@ export function SportsBooks() {
                 currentPage={currentPage}
                 onPageChange={setCurrentPage}
               />
-            </ContentTableCasino>
-          </FlexHomeCasino>
+            </ContentTableSportBook>
+          </FlexHomeSportBook>
         </Visibility>
 
-      </ContentCasino>
-    </ContainerCasino>
+      </ContentSportBook>
+    </ContainerSportBook>
 
+  );
+}
+
+export function SportsBooks() {
+  return (
+    <SportsBooksContextProvider>
+      <SportsBooksMain />
+    </SportsBooksContextProvider>
   );
 }

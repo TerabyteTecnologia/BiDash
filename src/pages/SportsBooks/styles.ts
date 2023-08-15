@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ContainerCasino = styled.div`
+export const ContainerSportBook = styled.div`
   display: block;
   flex-direction: column;
   padding: 1.25rem;
@@ -8,12 +8,12 @@ export const ContainerCasino = styled.div`
 	background: ${props => props.theme["gray-500"]};
 `;
 
-export const ContentCasino = styled.div`
+export const ContentSportBook = styled.div`
   margin: 0 auto
 `;
 
 
-export const OperationFlexCasino = styled.div`
+export const OperationFlexSportBook = styled.div`
   display: flex;
   gap: 1.25rem;
 
@@ -22,12 +22,12 @@ export const OperationFlexCasino = styled.div`
   }
 `;
 
-export const ContentSummaryCasino = styled.div`
+export const ContentSummarySportBook = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin: 1.25rem 0;
+  margin: 3.125rem 0 1.25rem 0;
 `;
 
 export const DivSpinnerSportsBook = styled.div`
@@ -39,7 +39,7 @@ export const DivSpinnerSportsBook = styled.div`
   margin-bottom: 800px;
 `;
 
-export const FlexHomeCasino = styled.div`
+export const FlexHomeSportBook = styled.div`
   display: flex;
   justify-content: center;
   gap: 1.25rem;
@@ -48,7 +48,7 @@ export const FlexHomeCasino = styled.div`
   height: auto;
 `;
 
-export const ContentTableCasino = styled.div`
+export const ContentTableSportBook = styled.div`
   width: 100%;
   height: auto;
 
@@ -60,7 +60,8 @@ export const ContentTableCasino = styled.div`
   overflow-x: auto;
   
   p {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+
     padding: 1.25rem 0;
     text-align: center;
   }
@@ -71,7 +72,7 @@ export const ContentTableCasino = styled.div`
   }
 `;
 
-export const ColumnSummaryCasino = styled.div`
+export const ColumnSummarySportBook = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.9375rem;

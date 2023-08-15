@@ -14,40 +14,49 @@ import { Spinner } from '../../components/Spinner';
 import { Summary } from '../../components/Summary';
 import TableRows from '../../components/TableRow';
 
-import {
-  GraphicAgeProps,
-  GraphicDatesProps,
-  GraphicGenderProps,
-  GraphicStateProps,
-  PlayerFilterProps,
-  PlayerProps
-} from './interface';
+import { PlayerFilterProps } from './interface';
 
 import { getReportHome } from '../../services/global/endPoints';
 
 import { calculateAge, calculateDateDifference, formatDate } from '../../utils/Date';
 import { useToast } from '../../hooks/useToast';
+
 import { useFilterSearch } from '../../contexts/FilterSearch';
+import { PlayersContextProvider, usePlayers } from '../../contexts/Players';
 
 import {
-  ContainerHome,
-  ContentFlexHome,
-  BackgroundHome,
+  ContainerPlayer,
+  ContentFlexPlayer,
+  BackgroundPlayer,
   ContentSummary,
   ContentTable,
-  FlexHome,
-  ContentHome,
-  DivSpinnerHome,
+  FlexPlayer,
+  ContentPlayer,
+  DivSpinnerPlayer,
 } from "./styles";
 
-export function Home() {
+export function PlayerMain() {
 
   const rowsPerPage = 5;
 
   const { toast } = useToast();
+  const {
+    setGraphicAgeData,
+    setGraphicDatesData,
+    setGraphicGenderData,
+    setGraphicStateData,
+    setPlayerCountDate,
+
+    playerCountDate,
+    graphicAgeData,
+    graphicDatesData,
+    graphicGenderData,
+    graphicStateData
+  } = usePlayers();
 
   const { dateFilter, isTest } = useFilterSearch();
 
+  const [playerFilterDate, setPlayerFilterDate] = useState<PlayerFilterProps[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
@@ -57,34 +66,6 @@ export function Home() {
   useEffect(() => {
     getLoadDataHome();
   }, []);
-
-  const [playerCountDate, setPlayerCountDate] = useState<PlayerProps>({
-    activePlayer: 0,
-    disabledPlayer: 0,
-    totalPlayer: 0
-  });
-
-  const [playerFilterDate, setPlayerFilterDate] = useState<PlayerFilterProps[]>([]);
-
-  const [graphicAgeData, setGraphicAgeData] = useState<GraphicAgeProps>({
-    ages: [],
-    quantitiesAges: []
-  });
-
-  const [graphicStateData, setGraphicStateData] = useState<GraphicStateProps>({
-    states: [],
-    quantitiesState: []
-  });
-
-  const [graphicDatesData, setGraphicDatesData] = useState<GraphicDatesProps>({
-    dates: [],
-    quantitiesDate: []
-  });
-
-  const [graphicGenderData, setGraphicGenderData] = useState<GraphicGenderProps>({
-    sortedGenders: [],
-    sortedQuantitiesByGender: []
-  });
 
   const handleSearchGraphic = () => {
     if (dateFilter.from === '' || dateFilter.to === '') {
@@ -167,15 +148,15 @@ export function Home() {
   };
 
   return (
-    <ContainerHome>
-      <ContentHome>
+    <ContainerPlayer>
+      <ContentPlayer>
 
         <FilterSearch handleSearch={handleSearchGraphic} showPlayerTest />
 
         <Visibility visible={loading}>
-          <DivSpinnerHome>
+          <DivSpinnerPlayer>
             <Spinner />
-          </DivSpinnerHome>
+          </DivSpinnerPlayer>
         </Visibility>
 
         <Visibility visible={!loading}>
@@ -204,44 +185,42 @@ export function Home() {
           </ContentSummary>
 
           <Visibility visible={showAreaChart}>
-            <BackgroundHome>
+            <BackgroundPlayer>
               <AreaChartComponent
                 labels={graphicDatesData.dates}
                 values={graphicDatesData.quantitiesDate}
                 title="Média de Registros"
               />
-            </BackgroundHome>
+            </BackgroundPlayer>
           </Visibility>
 
-          <BackgroundHome>
+          <BackgroundPlayer>
             <VerticalBarComponent
               labels={graphicStateData.states}
               values={graphicStateData.quantitiesState}
               title="Quantidade por Estados"
             />
-          </BackgroundHome>
+          </BackgroundPlayer>
 
-          <FlexHome>
-            <ContentFlexHome>
+          <FlexPlayer>
+            <ContentFlexPlayer>
               <VerticalBarComponent
                 labels={graphicAgeData.ages}
                 values={graphicAgeData.quantitiesAges}
                 title="Média por Idade"
               />
-            </ContentFlexHome>
+            </ContentFlexPlayer>
 
-
-            <ContentFlexHome>
+            <ContentFlexPlayer>
               <PieChartComponent
                 labels={graphicGenderData.sortedGenders}
                 values={graphicGenderData.sortedQuantitiesByGender}
                 title="Quantidade de Jogadores"
               />
-            </ContentFlexHome>
+            </ContentFlexPlayer>
+          </FlexPlayer>
 
-          </FlexHome>
-
-          <FlexHome>
+          <FlexPlayer>
             <ContentTable>
               <p>Informações dos usuários</p>
 
@@ -266,10 +245,19 @@ export function Home() {
                 onPageChange={setCurrentPage}
               />
             </ContentTable>
-          </FlexHome>
-        </Visibility>
-      </ContentHome>
-    </ContainerHome>
+          </FlexPlayer>
 
+        </Visibility>
+      </ContentPlayer>
+
+    </ContainerPlayer>
+  );
+}
+
+export function Player() {
+  return (
+    <PlayersContextProvider>
+      <PlayerMain />
+    </PlayersContextProvider>
   );
 }

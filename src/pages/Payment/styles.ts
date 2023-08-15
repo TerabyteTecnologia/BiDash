@@ -31,7 +31,7 @@ export const ContentSummaryPayment = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-  margin: 1.25rem 0;
+  margin: 3.125rem 0 1.25rem 0;
 `;
 
 export const FlexPayment = styled.div`

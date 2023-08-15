@@ -27,10 +27,6 @@ export const ContentInformationHistoricPlayer = styled.div`
   flex-direction: column;
   gap: 1.25rem;
 
-  margin-bottom: 2.5rem;
-
-  border-bottom: 2px solid  ${props => props.theme["gray-400"]};
-  padding-bottom: 1.25rem;
 `;
 
 export const DivSearchTitleHistoric = styled.div`
@@ -90,6 +86,7 @@ export const ContentSummaryHistoricPlayer = styled.div`
 
 interface InputPlayerHistoricProps {
   width: number | string;
+  variant?: "red" | "yellow" | "green" | "white";
 }
 
 export const InputPlayerHistoric = styled.div<InputPlayerHistoricProps>`
@@ -100,7 +97,7 @@ export const InputPlayerHistoric = styled.div<InputPlayerHistoricProps>`
   height: 2.5rem;
   padding: 0 0.625rem;
   flex-shrink: 0;
-  border: 1px solid  ${props => props.theme["white"]};
+  border: 1px solid  ${props => props.variant};
   border-radius: 0.625rem;
   background: transparent;
 
@@ -166,5 +163,23 @@ export const ContentTableHistoricPlayer = styled.div`
   @media (max-width: 1400px) {
     max-width: 900px;
     padding: 0.9375rem 2.25rem;
+  }
+`;
+
+export const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2.8125rem;
+
+  margin-bottom: 2.5rem;
+
+  border-bottom: 2px solid  ${props => props.theme["gray-400"]};
+  padding-bottom: 1.25rem;
+`;
+
+export const RiskPlayerTitleHistoric = styled.div`
+  img {
+    width: 500px;
   }
 `;

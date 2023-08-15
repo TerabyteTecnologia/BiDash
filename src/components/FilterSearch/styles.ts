@@ -6,8 +6,6 @@ export const ContainerFilterSearch = styled.div`
   align-items: center;
   gap: 0.625rem;
 
-  margin-bottom: 2.5rem;
-
   button {
     display: flex;
     align-items: center;

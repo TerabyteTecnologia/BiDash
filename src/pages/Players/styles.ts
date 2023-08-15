@@ -1,18 +1,20 @@
 import styled from "styled-components";
 
-export const ContainerHome = styled.div`
+export const ContainerPlayer = styled.div`
   display: block;
   flex-direction: column;
   padding: 1.25rem;
   margin-top: 0.625rem; 
 	background: ${props => props.theme["gray-500"]};
+
+  
 `;
 
-export const ContentHome = styled.div`
+export const ContentPlayer = styled.div`
   margin: 0 auto
 `;
 
-export const DivSpinnerHome = styled.div`
+export const DivSpinnerPlayer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,10 +28,10 @@ export const ContentSummary = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin: 1.25rem 0;
+  margin: 3.125rem 0 1.25rem 0;
 `;
 
-export const BackgroundHome = styled.div`
+export const BackgroundPlayer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +50,7 @@ export const BackgroundHome = styled.div`
 
 `;
 
-export const FlexHome = styled.div`
+export const FlexPlayer = styled.div`
   display: flex;
   justify-content: center;
   gap: 1.25rem;
@@ -61,7 +63,7 @@ export const FlexHome = styled.div`
   }
 `;
 
-export const ContentFlexHome = styled(BackgroundHome)`
+export const ContentFlexPlayer = styled(BackgroundPlayer)`
   width: 100%;
 `;
 
@@ -85,7 +87,7 @@ export const ContentTable = styled.div`
   }
 
   @media (max-width: 1400px) {
-    max-width: 900px;
+    max-width: 56.25rem;
     padding: 0.9375rem 2.25rem;
   }
 `;

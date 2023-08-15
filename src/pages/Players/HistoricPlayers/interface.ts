@@ -4,6 +4,7 @@ export interface PlayerFilterHistoricProps {
   is_test_client: string;
   registration_date: string;
   profit: string;
+  risk_level: number;
 }
 
 export interface ValueFilterHistoricProps {

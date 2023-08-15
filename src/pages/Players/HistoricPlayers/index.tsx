@@ -1,6 +1,11 @@
 import { useState, ChangeEvent } from 'react';
 
 import { FaSearch } from 'react-icons/fa';
+import alto from '../../../assets/img/alto.png';
+import baixo from '../../../assets/img/Baixo.png';
+import medio from '../../../assets/img/medio.png';
+import muitoAlto from '../../../assets/img/Muito-alto.png';
+import muitoBaixo from '../../../assets/img/Muito-baixo.png';
 
 import { TableSportBookHistoricPlayer } from './TableSportBookHistoricPlayer';
 import { TableCasinoHistoricPlayer } from './TableCasinoHistoricPlayer';
@@ -35,10 +40,11 @@ import {
   DivSearchTitleHistoric,
   ContentInformationHistoricPlayer,
   ContentSummaryHistoricPlayer,
+  Row,
+  RiskPlayerTitleHistoric,
 } from "./styles";
 
 export function HistoricPlayer() {
-
 
   const [loading, setLoading] = useState<boolean>(false);
   const [idSearchPlayer, setIdSearchPlayer] = useState<string>("");
@@ -48,7 +54,8 @@ export function HistoricPlayer() {
     btag: "",
     is_test_client: "",
     registration_date: "",
-    profit: "R$ 0"
+    profit: "R$ 0",
+    risk_level: 0
   });
 
   const [valueFilterHistoric, setValueFilterHistoric] = useState<ValueFilterHistoricProps>({
@@ -60,7 +67,6 @@ export function HistoricPlayer() {
 
   const [sportBookPlayersFilter, setSportBookPlayersFilter] = useState<SportBookPlayersFilterProps[]>([]);
   const [casinoPlayerFilter, setCasinoPlayerFilter] = useState<CasinoPlayersFilterProps[]>([]);
-
 
   const searchHistoricPlayer = () => {
     if (idSearchPlayer === "")
@@ -76,13 +82,15 @@ export function HistoricPlayer() {
 
     getHistoricPlayer(idSearchPlayer).then(result => {
 
+      console.log(result);
       if (result.data) {
         setPlayerFilterHistoric({
           name: result.data.playerFilter.name,
           btag: result.data.playerFilter.btag,
           is_test_client: result.data.playerFilter.is_test_client === 0 ? "Não" : "Sim",
           profit: formatCurrency(result.data.profit),
-          registration_date: formatDate(result.data.playerFilter.registration_date)
+          registration_date: formatDate(result.data.playerFilter.registration_date),
+          risk_level: result.data.risk_level
         });
 
         setValueFilterHistoric({
@@ -133,6 +141,25 @@ export function HistoricPlayer() {
     setIdSearchPlayer(e.target.value);
   };
 
+  const riskPlayer = [muitoAlto, muitoBaixo, medio, baixo, muitoBaixo];
+
+
+  const colorByRisk = () => {
+    if (playerFilterHistoric.risk_level === 0) {
+      return "red";
+    }
+
+    if (playerFilterHistoric.risk_level === 2) {
+      return "yellow";
+    }
+
+    if (playerFilterHistoric.risk_level === 4) {
+      return "green";
+    }
+
+    return "white";
+  };
+
   return (
     <ContainerHistoricSearch>
       <ContentHistoricSearch>
@@ -163,49 +190,56 @@ export function HistoricPlayer() {
         <Visibility visible={!!playerFilterHistoric.name}>
           <TitleHistoricPlayer>Históricos</TitleHistoricPlayer>
 
-          <ContentInformationHistoricPlayer>
-            <InformationPlayerTitleHistoric>
-              <div>
-                <p>Nome Jogador</p>
-                <InputPlayerHistoric width={350}>
-                  <span>{playerFilterHistoric.name}</span>
-                </InputPlayerHistoric>
-              </div>
-              <div>
-                <p>Data de Registro</p>
-                <InputPlayerHistoric width={120}>
-                  <span> {playerFilterHistoric.registration_date} </span>
-                </InputPlayerHistoric>
-              </div>
-              <div>
-                <p>Conta Teste</p>
-                <InputPlayerHistoric width={100}>
-                  <span>{playerFilterHistoric.is_test_client} </span>
-                </InputPlayerHistoric>
-              </div>
-            </InformationPlayerTitleHistoric>
+          <Row>
+            <ContentInformationHistoricPlayer>
+              <InformationPlayerTitleHistoric>
+                <div>
+                  <p>Nome Jogador</p>
+                  <InputPlayerHistoric width={350}>
+                    <span>{playerFilterHistoric.name}</span>
+                  </InputPlayerHistoric>
+                </div>
+                <div>
+                  <p>Data de Registro</p>
+                  <InputPlayerHistoric width={120}>
+                    <span> {playerFilterHistoric.registration_date} </span>
+                  </InputPlayerHistoric>
+                </div>
+                <div>
+                  <p>Conta Teste</p>
+                  <InputPlayerHistoric width={100}>
+                    <span>{playerFilterHistoric.is_test_client} </span>
+                  </InputPlayerHistoric>
+                </div>
+              </InformationPlayerTitleHistoric>
 
-            <InformationPlayerTitleHistoric>
-              <div>
-                <p>Btag</p>
-                <InputPlayerHistoric width={"auto"}>
-                  <span> {playerFilterHistoric.btag} </span>
-                </InputPlayerHistoric>
-              </div>
-              <div>
-                <p>Profit</p>
-                <InputPlayerHistoric width={200}>
-                  <span>{playerFilterHistoric.profit} </span>
-                </InputPlayerHistoric>
-              </div>
-            </InformationPlayerTitleHistoric>
-          </ContentInformationHistoricPlayer>
+              <InformationPlayerTitleHistoric>
+                <div>
+                  <p>Btag</p>
+                  <InputPlayerHistoric width={"auto"}>
+                    <span> {playerFilterHistoric.btag} </span>
+                  </InputPlayerHistoric>
+                </div>
+                <div>
+                  <p>Saldo na Carteira</p>
+                  <InputPlayerHistoric width={200} variant={colorByRisk()}>
+                    <span>{playerFilterHistoric.profit} </span>
+                  </InputPlayerHistoric>
+                </div>
+
+              </InformationPlayerTitleHistoric>
+            </ContentInformationHistoricPlayer>
+
+            <RiskPlayerTitleHistoric>
+              <img src={riskPlayer[playerFilterHistoric.risk_level]} />
+            </RiskPlayerTitleHistoric>
+          </Row>
 
           <ContentSummaryHistoricPlayer>
             <div>
               <p>Depósitos</p>
               <Summary
-                variant={validVariant((valueFilterHistoric.deposit))}
+                variant={validVariant(valueFilterHistoric.deposit)}
                 text=""
                 value={valueFilterHistoric.deposit}
                 isCenter

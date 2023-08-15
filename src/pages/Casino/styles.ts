@@ -35,7 +35,7 @@ export const ContentSummaryCasino = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin: 1.25rem 0;
+  margin: 3.125rem 0 1.25rem 0;
 `;
 
 

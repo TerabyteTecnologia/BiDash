@@ -11,18 +11,17 @@ import TableRows from '../../components/TableRow';
 import { MdAccountBalance, MdFileUpload } from "react-icons/md";
 import { IoMdDownload } from "react-icons/io";
 
-import {
-  PaymentsTableFilterProps,
-  DataPaymentsProps,
-  InitialOperation,
-  OperationsProps
-} from './interface';
+import { PaymentsTableFilterProps } from './interface';
 
 import { formatDate } from '../../utils/Date';
+import { validVariant } from '../../utils/Validation';
 import { currencyStringToNumber, formatCurrency } from '../../utils/Formatter';
 
 import { useToast } from '../../hooks/useToast';
 import { useFilterSearch } from '../../contexts/FilterSearch';
+import { OperationsProps } from '../../contexts/Payment/interface';
+import { PaymentContextProvider, usePayment } from '../../contexts/Payment';
+
 import { getReportPayment } from '../../services/global/endPoints';
 
 import {
@@ -34,21 +33,19 @@ import {
   OperationFlexPayment,
   DivSpinner
 } from "./styles";
-import { validVariant } from '../../utils/Validation';
 
-export function Payment() {
+export function PaymentMain() {
 
   const rowsPerPage = 5;
 
   const { toast } = useToast();
+  const { setDataPayments, dataPayments } = usePayment();
 
   const { dateFilter, isTest } = useFilterSearch();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(0);
-
-  const [dataPayments, setDataPayments] = useState<DataPaymentsProps>(InitialOperation);
 
   const [playerFilterDate, setPlayerFilterDate] = useState<PaymentsTableFilterProps[]>([]);
 
@@ -118,7 +115,6 @@ export function Payment() {
     });
   };
 
-
   return (
     <ContainerPayment>
       <ContentPayment>
@@ -165,8 +161,14 @@ export function Payment() {
           </ContentSummaryPayment>
 
           <OperationFlexPayment>
-            <OperationComponent title="Operações de Depósito" valueOperation={dataPayments.operations?.DEPOSIT} />
-            <OperationComponent title="Operações de Saque" valueOperation={dataPayments.operations?.WITHDRAWAL} />
+            <OperationComponent
+              title="Operações de Depósito"
+              valueOperation={dataPayments.operations?.DEPOSIT}
+            />
+            <OperationComponent
+              title="Operações de Saque"
+              valueOperation={dataPayments.operations?.WITHDRAWAL}
+            />
           </OperationFlexPayment>
 
           <FlexPayment>
@@ -196,8 +198,14 @@ export function Payment() {
           </FlexPayment>
         </Visibility>
       </ContentPayment>
+    </ContainerPayment>
+  );
+}
 
-    </ContainerPayment >
-
+export function Payment() {
+  return (
+    <PaymentContextProvider>
+      <PaymentMain />
+    </PaymentContextProvider>
   );
 }
