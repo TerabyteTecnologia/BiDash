@@ -1,17 +1,8 @@
 import {
   createContext,
   useContext,
-  useState,
-  ChangeEvent
+  useState
 } from 'react';
-
-import {
-  DateOutputStr,
-  calcDataFrom,
-  calcDataTo,
-  getMaxDateInSearchFilter,
-  getMinDateInSearchFilter
-} from '../../utils/Date';
 
 import {
   GraphicAgeProps,

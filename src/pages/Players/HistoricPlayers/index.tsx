@@ -141,7 +141,7 @@ export function HistoricPlayer() {
     setIdSearchPlayer(e.target.value);
   };
 
-  const riskPlayer = [muitoAlto, muitoBaixo, medio, baixo, muitoBaixo];
+  const riskPlayer = [alto, muitoAlto, medio, baixo, muitoBaixo];
 
 
   const colorByRisk = () => {

@@ -185,7 +185,10 @@ const Dashboard = () => {
           resolve(result);
         }
 
-      });
+      })
+        .catch((error) => {
+          reject(error); // Rejeitar a Promise em caso de erro
+        });
     });
   };
 

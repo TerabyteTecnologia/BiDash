@@ -1,4 +1,5 @@
-import { PopularGamesProps } from "../../pages/Casino/interface";
+import { PopularGamesProps } from "../../contexts/Casino/interface";
+
 
 export interface Top10PopularGame {
   data: PopularGamesProps[];

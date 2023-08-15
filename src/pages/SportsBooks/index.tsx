@@ -21,7 +21,7 @@ import { formatDate } from '../../utils/Date';
 import { validVariant } from '../../utils/Validation';
 import { currencyStringToNumber, formatCurrency } from '../../utils/Formatter';
 
-import { PopularGamesProps, SportsBooksTableFilterProps } from './interface';
+import { SportsBooksTableFilterProps } from './interface';
 
 import {
   ColumnSummarySportBook,

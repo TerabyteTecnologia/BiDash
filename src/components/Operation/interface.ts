@@ -1,4 +1,5 @@
-import { OperationsItemsProps } from "../../pages/Payment/interface";
+import { OperationsItemsProps } from "../../contexts/Payment/interface";
+
 
 export interface OperationComponentProps {
   title: string;
