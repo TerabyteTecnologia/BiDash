@@ -105,7 +105,7 @@ const Dashboard = () => {
     const loadDataCasino = getLoadDataCasino();
     const loadDataSportsBook = getLoadDataSportsBook();
 
-    Promise.all([loadDataPlayer, loadDataPayment])
+    Promise.all([loadDataPlayer, loadDataPayment, loadDataCasino, loadDataSportsBook])
       .then(() => {
         setLoading(false);
       })
