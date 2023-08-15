@@ -5,7 +5,7 @@ import alto from '../../../assets/img/alto.png';
 import baixo from '../../../assets/img/Baixo.png';
 import medio from '../../../assets/img/medio.png';
 import muitoAlto from '../../../assets/img/Muito-alto.png';
-import muitoBaixo from '../../../assets/img/Muito-baixo.png';
+import muitoBaixo from '../../../assets/img/muito-baixo.png';
 
 import { TableSportBookHistoricPlayer } from './TableSportBookHistoricPlayer';
 import { TableCasinoHistoricPlayer } from './TableCasinoHistoricPlayer';
