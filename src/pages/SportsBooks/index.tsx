@@ -59,9 +59,8 @@ export function SportsBooksMain() {
 
   const [playerFilterDate, setPlayerFilterDate] = useState<SportsBooksTableFilterProps[]>([]);
 
-  console.log("dataSportsBooks", dataSportsBooks);
   useEffect(() => {
-    // getLoadDataSportsBook();
+    getLoadDataSportsBook();
   }, []);
 
   const handleSearchGraphic = () => {
