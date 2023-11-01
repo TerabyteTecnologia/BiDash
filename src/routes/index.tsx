@@ -7,6 +7,11 @@ import { Casino } from "../pages/Casino";
 import { SportsBooks } from "../pages/SportsBooks";
 import { HistoricPlayer } from "../pages/Players/HistoricPlayers";
 import { Home } from "../pages/Home";
+import { Campanhas } from "../pages/Campanhas";
+import { EditCampanha } from "../pages/Campanhas/EditCampanha";
+
+import { Emails } from "../pages/Emails";
+import { Email } from "../pages/Emails/EditEmail";
 
 export function Router() {
   return (
@@ -18,6 +23,13 @@ export function Router() {
         <Route path="/pagamentos" element={<Payment />} />
         <Route path="/cassino" element={<Casino />} />
         <Route path="/livros-esportes" element={<SportsBooks />} />
+        <Route path="/campanhas" element={<Campanhas />} />
+        <Route path="/campanha/:id" element={<EditCampanha />} />
+        <Route path="/campanha" element={<EditCampanha />} />
+
+        <Route path="/emails/:id" element={<Emails />} />
+        <Route path="/email/:id" element={<Email />} />
+        <Route path="/createemail/:idcampanha" element={<Email />} />
       </Route>
 
       <Route path="/login" element={<Login />} />

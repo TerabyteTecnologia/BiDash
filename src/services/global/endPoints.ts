@@ -1,4 +1,6 @@
 import { LoginProps } from "../../contexts/Auth/interface";
+import { HistoricCampanhaProps } from "../../pages/Campanhas/interface";
+import { BodyDisparoProps, HistoricEmailProps } from "../../pages/Emails/interface";
 import api from "./api";
 
 export const loginPost = (data: LoginProps) => {
@@ -54,4 +56,46 @@ export const getColorLocalStorage = () => {
     return JSON.parse(colorsString);
   }
   return null;
+};
+
+
+//Campanhas
+export const getCampanhas = () => {
+  return Promise.resolve(api.get(`/disparo/listarcampanhas`));
+};
+
+export const getCampanha = (id:number) => {
+  return Promise.resolve(api.get(`/disparo/listacampanha/${id}`));
+};
+
+export const storeCampanha = (campanha:HistoricCampanhaProps) => {
+  return Promise.resolve(api.post(`/disparo/criarcampanha`,campanha));
+};
+
+export const updateCampanha = (campanha:HistoricCampanhaProps,id:number) => {
+  return Promise.resolve(api.put(`/disparo/updatecampanha/${id}`,campanha));
+};
+
+
+//Emails
+export const getEmails = (id:number) => {
+  return Promise.resolve(api.get(`/disparo/listarEmails/${id}`));
+};
+export const getEmail = (id:number) => {
+  return Promise.resolve(api.get(`/disparo/listaemail/${id}`));
+};
+
+export const updateEmail = (email:HistoricEmailProps,id:number) => {
+  return Promise.resolve(api.put(`/disparo/updateemail/${id}`,email));
+};
+
+export const storeEmail = (email:HistoricEmailProps) => {
+  return Promise.resolve(api.post(`/disparo/criaremail`,email));
+};
+export const deleteEmail = (id:number) => {
+  return Promise.resolve(api.delete(`/disparo/deleteemail/${id}`));
+};
+
+export const disparoEmail = (body:BodyDisparoProps) => {
+  return Promise.resolve(api.post(`/disparo`,body));
 };

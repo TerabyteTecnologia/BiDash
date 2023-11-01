@@ -31,6 +31,9 @@ const Sidebar = () => {
         <SidebarItem Icon={FaChartBar} Text="Registros" route="/livros-esportes" isActive={location.pathname === '/livros-esportes'} />
         {/* <p>CONFIGURAÇÕES</p>
         <SidebarItem Icon={FaUserCog} Text="Usuários" route="/" /> */}
+        <p>Campanhas</p>
+        <SidebarItem Icon={FaChartBar} Text="Campanhas" route="/campanhas" isActive={location.pathname === '/campanhas'} />
+        
       </SideBarContent>
     </SideBarContainer>
   );

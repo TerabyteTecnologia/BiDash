@@ -2,8 +2,8 @@ import axios from "axios";
 import { getTokenLocalStorage } from "./endPoints";
 
 const api = axios.create({
-  // baseURL: "https://api-brisabet.terabytetecnologia.com.br"
-  baseURL: "https://api-jogosdasorte.terabytetecnologia.com.br"
+  baseURL: "http://localhost:3020"
+  // baseURL: "https://api-jogosdasorte.terabytetecnologia.com.br"
 });
 
 api.interceptors.request.use(async (config) => {
